@@ -6,10 +6,12 @@ import { store } from './store/store'
 
 export const NotesApp: React.FC = () => {
   return (
-    <Provider store={store}>    
-        <BrowserRouter>
-            <AppRouter />
-        </BrowserRouter>
-    </Provider>
+    <div className='font-poppins'>
+      <Provider store={store}>    
+          <BrowserRouter>
+              <AppRouter />
+          </BrowserRouter>
+      </Provider>
+    </div>
   )
 }
