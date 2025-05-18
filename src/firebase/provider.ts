@@ -1,6 +1,5 @@
-import { signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth"
 import { FirebaseAuth } from "./config"
-import { GoogleAuthProvider } from "firebase/auth/web-extension"
 
 const googleProvider = new GoogleAuthProvider()
 

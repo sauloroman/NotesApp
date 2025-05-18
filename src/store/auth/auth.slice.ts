@@ -22,7 +22,7 @@ export const initialState: InitialStateAuth = {
     displayName: null,
     email: null,
     photoURL: null,
-    isLoading: false,   
+    isLoading: false,
 }
 
 

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
-import { getEnvVariables } from "../helpers";
+import { getEnvVariables } from "../shared/helpers";
 
 const {
     VITE_APIKEY,

@@ -18,7 +18,7 @@ export const LoginPage: React.FC = () => {
     formState: { errors }
   } = useForm<FormData>()
 
-  const { loginUser } = useAuth() 
+  const { loginUser, loginWithGoogle } = useAuth() 
 
   const onLoginUser = ( data: FormData ) => {
     const { email, password } = data
@@ -43,7 +43,7 @@ export const LoginPage: React.FC = () => {
       linkText="¿No tienes una cuenta?"
       linkText2="Regístrate"
     >
-      <button className='mt-6 p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer hover:bg-gray-50'>
+      <button onClick={ () => loginWithGoogle() } className='mt-6 p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer hover:bg-gray-50'>
         <FaGoogle className='inline-block mr-2' />
         Continuar con Google
       </button>

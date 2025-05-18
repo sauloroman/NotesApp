@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { LoginWithEmailAndPassword, RegisterUserWithEmail } from "../firebase/provider"
-import { startCreatingUserWithEmail, startLoggingWithEmail } from "../store/auth/auth.thunk"
+import { startCreatingUserWithEmail, startLoggingWithEmail, startLoggingWithGoogle } from "../store/auth/auth.thunk"
 import type { RootState } from "../store/store"
 
 export const useAuth = () => {
@@ -23,6 +23,10 @@ export const useAuth = () => {
         dispatch( startLoggingWithEmail( data ) )
     }
 
+    const loginWithGoogle = () => {
+        dispatch( startLoggingWithGoogle() )
+    }
+
     return {
         // Attributes
         displayName,
@@ -34,7 +38,8 @@ export const useAuth = () => {
 
         // Methods
         registerUser,
-        loginUser
+        loginUser,
+        loginWithGoogle
     }
 
 }

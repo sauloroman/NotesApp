@@ -1,6 +1,6 @@
 import type { Dispatch } from "@reduxjs/toolkit"
 import { login, setIsLoading } from "./auth.slice"
-import { loginWithEmailAndPassword, registerUserWithEmail, type LoginWithEmailAndPassword, type RegisterUserWithEmail } from "../../firebase/provider"
+import { loginWithEmailAndPassword, registerUserWithEmail, singInWithGoogle, type LoginWithEmailAndPassword, type RegisterUserWithEmail } from "../../firebase/provider"
 import { showAlert, AlertType } from "../ui/ui.slice"
 
 export const startCreatingUserWithEmail = (data: RegisterUserWithEmail) => {
@@ -78,5 +78,39 @@ export const startLoggingWithEmail = (data: LoginWithEmailAndPassword) => {
 
         dispatch( setIsLoading( false ) )
 
+    }
+}
+
+export const startLoggingWithGoogle = () => {
+    return async ( dispatch: Dispatch ) => {
+        dispatch( setIsLoading( true ) )
+
+        try {
+
+            const result = await singInWithGoogle()
+
+            const { uid, email, displayName, photoURL } = result
+           
+            dispatch( login({
+                uid: uid!,
+                email: email!,
+                displayName: displayName!,
+                photoURL: photoURL! 
+            }) )
+
+            dispatch( showAlert({
+                message: `Bienvenido ${displayName}`,
+                type: AlertType.success 
+            }))
+
+        } catch( error ) {
+            dispatch( showAlert({
+                message: (error as Error).message,
+                type: AlertType.error
+            }))
+        }
+
+
+        dispatch( setIsLoading( false ) )
     }
 }
