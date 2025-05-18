@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from 'react-hook-form'
+import { AuthLayout } from '../layout/AuthLayout'
+import { useAuth } from '../../hooks';
 import { FaRegEye } from "react-icons/fa";
 
 type FormData = {
@@ -14,13 +15,27 @@ export const RegisterPage: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<FormData>()
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const { registerUser } = useAuth()
 
   const onRegisterUser = ( data: FormData ) => {
-    console.log(data)
+    const { name, email, password } = data
+
+    registerUser({
+      email,
+      password,
+      displayName: name
+    })
+
+    reset({
+      name: '',
+      email: '',
+      password: ''
+    })
   }
 
   return (

@@ -2,6 +2,7 @@ import React from 'react'
 import { FaGoogle } from "react-icons/fa6";
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../hooks';
 
 type FormData = {
   email: string,
@@ -13,11 +14,24 @@ export const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<FormData>()
 
+  const { loginUser } = useAuth() 
+
   const onLoginUser = ( data: FormData ) => {
-    console.log(data)
+    const { email, password } = data
+
+    loginUser({
+      email,
+      password
+    })
+
+    reset({
+      email: '',
+      password: ''
+    })
   }
 
   return (
