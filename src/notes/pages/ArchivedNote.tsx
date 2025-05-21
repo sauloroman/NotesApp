@@ -1,7 +1,8 @@
 import React from 'react'
+import { NotesLayout } from '../layout/NotesLayout'
 
 export const ArchivedNote: React.FC = () => {
   return (
-    <div>ArchivedNote</div>
+    <NotesLayout>ArchivedNote</NotesLayout>
   )
 }

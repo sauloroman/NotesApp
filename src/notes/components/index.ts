@@ -1,0 +1,8 @@
+export { AsideMenu } from './AsideMenu'
+export { MenuPages } from './MenuPages'
+export { TagList } from './TagList'
+export { Header } from './Header'
+export { InputSearchNote } from './InputSearchNote'
+export { NoteCard } from './NoteCard'
+export { NotesList } from './NotesList'
+export { FormCreateNote } from './FormCreateNote'

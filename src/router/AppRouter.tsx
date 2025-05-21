@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthRouter } from './AuthRouter'
 import { NotesRouter } from './NotesRouter'
@@ -7,7 +7,11 @@ import { AuthStatus } from '../store/auth/auth.slice'
 
 export const AppRouter: React.FC = () => {
 
-  const { status } = useAuth()
+  const { status, checkAuth } = useAuth()
+
+  useEffect(() => {
+    checkAuth()
+  }, [])
 
   return (
     <Routes> 

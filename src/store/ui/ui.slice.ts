@@ -13,6 +13,9 @@ interface InitialStateUI {
         message: string | null,
         type: AlertType,
         isAlertOpen: boolean,
+    },
+    createNote: {
+        isOpen: boolean,
     }
 }
 
@@ -21,6 +24,9 @@ export const initialState: InitialStateUI = {
         message: null,
         type: AlertType.info,
         isAlertOpen: false,
+    },
+    createNote: {
+        isOpen: false,
     }
 }
 
@@ -45,6 +51,10 @@ export const uiSlice = createSlice({
                 type: AlertType.info,
                 isAlertOpen: false,
             }
+        },
+
+        createNoteOpen: (state, {payload}: PayloadAction<boolean> ) => {
+            state.createNote.isOpen = payload
         }
 
     }
@@ -52,4 +62,6 @@ export const uiSlice = createSlice({
 
 export const {
     showAlert,
+    closeAlert,
+    createNoteOpen
 } = uiSlice.actions

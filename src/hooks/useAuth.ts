@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import type { LoginWithEmailAndPassword, RegisterUserWithEmail } from "../firebase/provider"
 import { startCreatingUserWithEmail, startLoggingWithEmail, startLoggingWithGoogle } from "../store/auth/auth.thunk"
 import type { RootState } from "../store/store"
+import { onAuthStateChanged } from "firebase/auth"
+import { FirebaseAuth } from "../firebase/config"
+import { login, logout } from "../store/auth/auth.slice"
 
 export const useAuth = () => {
 
@@ -27,6 +30,21 @@ export const useAuth = () => {
         dispatch( startLoggingWithGoogle() )
     }
 
+    const checkAuth = () => {
+        onAuthStateChanged( FirebaseAuth, async (user) => {
+            if (!user) dispatch( logout() )
+
+            const { displayName, email, photoURL, uid } = user!
+
+            dispatch( login({ 
+                displayName: displayName!, 
+                email: email!, 
+                photoURL: photoURL!, 
+                uid: uid!    
+            }))
+        } )
+    }
+
     return {
         // Attributes
         displayName,
@@ -39,7 +57,8 @@ export const useAuth = () => {
         // Methods
         registerUser,
         loginUser,
-        loginWithGoogle
+        loginWithGoogle,
+        checkAuth
     }
 
 }
