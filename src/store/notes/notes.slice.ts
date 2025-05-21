@@ -1,28 +1,29 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-export interface Category {
+export interface Tag {
     uid: string,
     name: string,
-    color: string,
 }
 
 export interface Note  {
     uid: string,
     title: string,
-    description: string,
+    content: string,
     archived: boolean,
-    createdAt: number,
-    categories: Category[],
-    updatedAt: number,
+    tags: Tag[],
+    createdAt: string,
+    updatedAt: string,
 }
 
 interface InitialStateNotes {
     notes: Note[],
+    tags: Tag[],
     isLoading: boolean, 
 }
 
 const initialState: InitialStateNotes = { 
     notes: [],
+    tags: [],
     isLoading: false,
 }
 
@@ -35,9 +36,23 @@ export const notesSlice = createSlice({
             state.notes = payload   
         },
 
+        setIsLoadingNote: ( state, { payload }: PayloadAction<boolean>) => {
+            state.isLoading = payload
+        },
+
+        addNewNote( state, { payload }: PayloadAction<Note> ) {
+            state.notes.push( payload )
+        },
+
+        addTags: ( state, {payload}: PayloadAction<Tag[]>) => {
+            
+        }
+
     }
 })
 
 export const {
     setNotes,
+    setIsLoadingNote,
+    addNewNote
 } = notesSlice.actions

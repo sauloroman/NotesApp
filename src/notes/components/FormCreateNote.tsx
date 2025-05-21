@@ -1,13 +1,51 @@
 import React from 'react'
 import { LuTags } from "react-icons/lu";
 import { GoClock } from "react-icons/go";
+import { useForm } from 'react-hook-form';
+import { useNotes } from '../../hooks/useNotes';
+
+type FormData = {
+    title: string,
+    content: string,
+    tags: string
+}
 
 export const FormCreateNote: React.FC = () => {
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: {errors}
+  } = useForm<FormData>()
+  const { createNewNote } = useNotes()
+
+  const onCreateNewNote = ( data: FormData ) => {
+    const { tags } = data
+    
+    const tagsToSave = tags
+        .split(',')
+        .map( (tag: string) => tag.trim().toLowerCase() )
+        .filter( (tag: string ) => tag.length > 2 )
+
+    createNewNote({ ...data, tags: tagsToSave })
+    reset()
+  }
+
   return (
-    <form>
+    <form onSubmit={ handleSubmit( onCreateNewNote ) }>
         <fieldset className='border-b border-gray-300 p-4 px-6'>    
             <div className='mb-4'>
                 <input
+                    {
+                        ...register('title', {
+                            required: 'El título de la nota es requerido',
+                            minLength: {
+                                value: 2,
+                                message: 'El título debe de tener al menos 2 caracteres'
+                            }
+                        })
+                    }
                     placeholder='Título de la nota...'
                     type="text" 
                     className='w-full p-2 border-none text-xl font-bold'
@@ -19,6 +57,11 @@ export const FormCreateNote: React.FC = () => {
                     Tags
                 </label>
                 <input
+                    {
+                        ...register('tags', {
+                            required: 'Al menos una tag debe crearse',
+                        })
+                    }
                     placeholder='Añade etiquetas separadolas por comas'
                     className='w-full p-2 border-none text-gray-500 text-sm' 
                     type="text" 
@@ -34,12 +77,17 @@ export const FormCreateNote: React.FC = () => {
         </fieldset>
         <div className='p-4 px-6 border-b border-gray-300'>
             <textarea
+                {
+                    ...register('content', { 
+                        required: 'El contenido de la nota es requerido'
+                    })
+                }
                 placeholder='Escribe tu nota aquí...'
                 className='w-full h-96 p-2 border-none text-sm'
             />
         </div>
         <div className="p-4 px-6">
-            <button className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
+            <button type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
         </div>
     </form>
   )

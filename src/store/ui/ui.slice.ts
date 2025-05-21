@@ -15,6 +15,7 @@ interface InitialStateUI {
         isAlertOpen: boolean,
     },
     createNote: {
+        skeletonActive: boolean,
         isOpen: boolean,
     }
 }
@@ -26,6 +27,7 @@ export const initialState: InitialStateUI = {
         isAlertOpen: false,
     },
     createNote: {
+        skeletonActive: false,
         isOpen: false,
     }
 }
@@ -53,8 +55,20 @@ export const uiSlice = createSlice({
             }
         },
 
-        createNoteOpen: (state, {payload}: PayloadAction<boolean> ) => {
-            state.createNote.isOpen = payload
+        activeSkeletonCreateNote: (state ) => {
+            state.createNote.skeletonActive = true
+        },
+
+        deactiveSkeletonCreateNote: (state ) => {
+            state.createNote.skeletonActive = false
+        },
+
+        activeCreateNote: ( state ) => {
+            state.createNote.isOpen = true
+        },
+
+        deactiveCreateNote: ( state ) => {
+            state.createNote.isOpen = false
         }
 
     }
@@ -63,5 +77,8 @@ export const uiSlice = createSlice({
 export const {
     showAlert,
     closeAlert,
-    createNoteOpen
+    activeSkeletonCreateNote,
+    activeCreateNote,
+    deactiveCreateNote,
+    deactiveSkeletonCreateNote
 } = uiSlice.actions

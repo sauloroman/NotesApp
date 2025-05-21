@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/store"
-import { createNoteOpen } from "../store/ui/ui.slice"
+import { activeSkeletonCreateNote, activeCreateNote, deactiveSkeletonCreateNote } from "../store/ui/ui.slice"
 
 export const useUi = () => {
 
@@ -9,7 +9,12 @@ export const useUi = () => {
     const { alert, createNote } = useSelector( (state: RootState) => state.ui )
 
     const openCreateNote = () => {
-        dispatch( createNoteOpen(true) )    
+        dispatch( activeSkeletonCreateNote() )    
+
+        setTimeout(() => {
+            dispatch( deactiveSkeletonCreateNote() )
+            dispatch( activeCreateNote() )
+        }, 1500 )
     }
 
     return {

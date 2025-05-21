@@ -1,11 +1,11 @@
 import React from 'react'
 import { NotesLayout } from '../layout/NotesLayout'
-import { NotesList } from '../components'
+import { NotesList, SkeletonFormCreateNote } from '../components'
 import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
 
 export const NotesPage: React.FC = () => {
-  const { openCreateNote, createNote: { isOpen } } = useUi()
+  const { openCreateNote, createNote: { isOpen, skeletonActive } } = useUi()
 
   return (
     <NotesLayout>
@@ -17,6 +17,7 @@ export const NotesPage: React.FC = () => {
           <NotesList />
         </div>
         <div className="col-span-3">
+          { skeletonActive && <SkeletonFormCreateNote /> }
           { isOpen && <CreateNoteView /> }
         </div>
       </div>
