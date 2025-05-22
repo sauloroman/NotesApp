@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NotesLayout } from '../layout/NotesLayout'
 import { NotesList, SkeletonFormCreateNote } from '../components'
 import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
+import { useNotes } from '../../hooks'
 
 export const NotesPage: React.FC = () => {
   const { openCreateNote, createNote: { isOpen, skeletonActive } } = useUi()
+  const { getNotes } = useNotes()
+
+  useEffect(() => {
+    getNotes()
+  }, [])
 
   return (
     <NotesLayout>

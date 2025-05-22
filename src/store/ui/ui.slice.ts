@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Note } from "../notes/notes.slice";
 
 export const AlertType = {
     success: 'success',
@@ -17,6 +18,10 @@ interface InitialStateUI {
     createNote: {
         skeletonActive: boolean,
         isOpen: boolean,
+    },
+    viewNote: {
+        selected: Note | null,
+        isOpen: boolean,
     }
 }
 
@@ -28,6 +33,10 @@ export const initialState: InitialStateUI = {
     },
     createNote: {
         skeletonActive: false,
+        isOpen: false,
+    },
+    viewNote: {
+        selected: null,
         isOpen: false,
     }
 }
