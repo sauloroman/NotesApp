@@ -78,6 +78,16 @@ export const uiSlice = createSlice({
 
         deactiveCreateNote: ( state ) => {
             state.createNote.isOpen = false
+        },
+
+        activateNote: ( state, {payload}: PayloadAction<Note> ) => {
+            state.viewNote.isOpen = true
+            state.viewNote.selected = payload
+        },
+
+        deactivateNote: ( state ) => {
+            state.viewNote.isOpen = false
+            state.viewNote.selected = null
         }
 
     }
@@ -88,6 +98,8 @@ export const {
     closeAlert,
     activeSkeletonCreateNote,
     activeCreateNote,
+    activateNote,
     deactiveCreateNote,
-    deactiveSkeletonCreateNote
+    deactiveSkeletonCreateNote,
+    deactivateNote,
 } = uiSlice.actions

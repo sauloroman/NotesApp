@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { setIsLoading } from "../auth/auth.slice"
-import { deactiveCreateNote } from "../ui/ui.slice"
+import { activateNote, deactiveCreateNote } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
 import { addNewNote, addTags, setNotes, type Note } from "./notes.slice"
@@ -30,6 +30,7 @@ export const startCreatingNote = ( newNote: Partial<Note> ) => {
             dispatch( addNewNote( noteInStore ) )
             dispatch( addTags(newNote.tags!) )
             dispatch( deactiveCreateNote() ) 
+            dispatch( activateNote(newNote as Note) )
 
         } catch (error) {   
             console.log(error)

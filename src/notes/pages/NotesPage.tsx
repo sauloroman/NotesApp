@@ -4,9 +4,14 @@ import { NotesList, SkeletonFormCreateNote } from '../components'
 import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
 import { useNotes } from '../../hooks'
+import { SelectNoteView } from '../views/SelectNoteView'
 
 export const NotesPage: React.FC = () => {
-  const { openCreateNote, createNote: { isOpen, skeletonActive } } = useUi()
+  const { 
+    openCreateNote, 
+    createNote: { isOpen: isOpenCreateNote, skeletonActive },
+    viewNote: { isOpen: isOpenNote }
+  } = useUi()
   const { getNotes } = useNotes()
 
   useEffect(() => {
@@ -23,8 +28,10 @@ export const NotesPage: React.FC = () => {
           <NotesList />
         </div>
         <div className="col-span-3">
+
           { skeletonActive && <SkeletonFormCreateNote /> }
-          { isOpen && <CreateNoteView /> }
+          { isOpenCreateNote && <CreateNoteView /> }
+          { isOpenNote && <SelectNoteView />}
         </div>
       </div>
     </NotesLayout>

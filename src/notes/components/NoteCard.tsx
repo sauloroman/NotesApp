@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Note } from '../../store/notes/notes.slice'
 import { formatDate } from '../../shared/helpers'
+import { useUi } from '../../hooks'
 
 interface NoteCardProps {
   note: Note
@@ -8,11 +9,16 @@ interface NoteCardProps {
 
 export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
 
-  const { createdAt, tags, title, uid } = note
+  const { createdAt, tags, title } = note
   const dateFormatted = formatDate( createdAt )
+  const { selectNote } = useUi()
+
+  const onSelectNote = () => {
+    selectNote( note )
+  }
 
   return (
-    <li className='p-4 cursor-pointer transition-all hover:bg-violet-50'>
+    <li onClick={ onSelectNote } className='p-4 cursor-pointer transition-all hover:bg-violet-50'>
       <h3 className='text-sm font-semibold mb-2'>{title}</h3>
 
       <div className="flex gap-2 flex-wrap mb-2">
