@@ -3,6 +3,7 @@ import { LuTags } from "react-icons/lu";
 import { GoClock } from "react-icons/go";
 import { useForm } from 'react-hook-form';
 import { useNotes } from '../../hooks/useNotes';
+import { getTagsArray } from '../../shared/helpers';
 
 type FormData = {
     title: string,
@@ -16,18 +17,13 @@ export const FormCreateNote: React.FC = () => {
     register,
     handleSubmit,
     reset,
-    formState: {errors}
   } = useForm<FormData>()
+
   const { createNewNote } = useNotes()
 
   const onCreateNewNote = ( data: FormData ) => {
     const { tags } = data
-    
-    const tagsToSave = tags
-        .split(',')
-        .map( (tag: string) => tag.trim().toLowerCase() )
-        .filter( (tag: string ) => tag.length > 2 )
-
+    const tagsToSave = getTagsArray( tags )
     createNewNote({ ...data, tags: tagsToSave })
     reset()
   }

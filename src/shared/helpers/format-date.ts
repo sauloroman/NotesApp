@@ -1,8 +1,6 @@
 export const formatDate = ( dateStr: string ): string => {
 
-    console.log(dateStr)
-
-    const [day, month, yearContent] = dateStr.split('/')
+    const [day, month, yearContent] = dateStr?.split('/') ?? []
 
     const months = [
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",

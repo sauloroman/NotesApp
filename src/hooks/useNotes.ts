@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/store"
-import { startCreatingNote, startGettingNotes } from "../store/notes/notes.thunk"
+import { startCreatingNote, startGettingNotes, startUpdatingNote } from "../store/notes/notes.thunk"
 
 export const useNotes = () => {
 
@@ -23,6 +23,17 @@ export const useNotes = () => {
         dispatch( startCreatingNote( note ) )
     }
 
+    const updateNote = ( data: {title: string, content: string, tags: string[] } ) => {
+
+        const noteUpdated = {
+            ...data,
+            updatedAt: new Date().toLocaleString()
+        }
+
+        dispatch( startUpdatingNote( noteUpdated ) )
+
+    }
+
     const getNotes = () => {
         dispatch( startGettingNotes() )
     }
@@ -34,6 +45,7 @@ export const useNotes = () => {
 
         createNewNote,
         getNotes,
+        updateNote,
     }
 
 }

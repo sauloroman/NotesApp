@@ -45,8 +45,11 @@
                 state.tags = Array.from( new Set( combined ) )
             },
 
-            setTags: () => {
-                
+            updateNotes: ( state, {payload}: PayloadAction<Note> ) => {
+                state.notes = state.notes.map( (note: Note) => {
+                    if ( note.uid === payload.uid ) return payload
+                    return note
+                })
             }
 
         }
@@ -57,4 +60,5 @@
         setIsLoadingNote,
         addNewNote,
         addTags,
+        updateNotes,
     } = notesSlice.actions

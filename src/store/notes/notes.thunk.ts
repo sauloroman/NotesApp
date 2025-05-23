@@ -4,7 +4,7 @@ import { setIsLoading } from "../auth/auth.slice"
 import { activateNote, deactiveCreateNote } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
-import { addNewNote, addTags, setNotes, type Note } from "./notes.slice"
+import { addNewNote, addTags, setNotes, updateNotes, type Note } from "./notes.slice"
 import type { RootState } from "../store"
 
 export const startCreatingNote = ( newNote: Partial<Note> ) => {
@@ -75,6 +75,43 @@ export const startGettingNotes = () => {
         }
 
         dispatch( setIsLoading(false) )
+
+    }
+}
+
+export const startUpdatingNote = ( data: Partial<Note> ) => {
+    return async( dispatch: Dispatch, getState: () => RootState ) => {
+
+        const { uid: userUid } = getState().auth
+        const { viewNote: { selected } } = getState().ui
+
+        dispatch( setIsLoading(true) )
+
+        try {
+            
+            const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${selected?.uid}` )
+            await setDoc( noteRef, { ...data }, { merge: true }) 
+
+            const newNote: Note = {
+                uid: selected?.uid!,                
+                createdAt: selected?.createdAt!,
+                archived: selected?.archived!,
+                content: data.content!,
+                title: data.title!,
+                tags: data.tags!,
+                updatedAt: data.updatedAt!,
+            }
+
+            dispatch( updateNotes( newNote ) )
+            dispatch( activateNote({
+                ...data,
+            } as Note))
+
+        } catch (error) {
+            console.log('Error al actualizar la nota: ', error )
+        }
+
+        dispatch( setIsLoading( false ) )
 
     }
 }

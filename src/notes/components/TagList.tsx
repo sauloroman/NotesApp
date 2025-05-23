@@ -12,7 +12,7 @@ export const TagList: React.FC = () => {
         <ul className='flex flex-col gap-2'>
             {
                 tags.map( tag => (
-                    <li className=' flex items-center gap-2 text-gray-600  rounded-md p-2 transition-colors duration-200'>
+                    <li key={tag} className=' flex items-center gap-2 text-gray-600  rounded-md p-2 transition-colors duration-200'>
                         <IoPricetagOutline />
                         {tag}
                     </li>
