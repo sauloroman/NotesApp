@@ -73,11 +73,11 @@
                 state.notesInView = state.notes.filter( note => note.archived )
             },
 
-            archivedNote: ( state, {payload}: PayloadAction<string>) => {
+            toggleArchivateNote: ( state, {payload}: PayloadAction<string>) => {
                 state.notes = state.notes.map( note => {
                     if ( note.uid === payload ) return {
                         ...note,
-                        archived: true,
+                        archived: !note.archived,
                     } 
                     return note
                 })
@@ -94,6 +94,6 @@
         updateNotes,
         setFilterTag,
         setNotesInView,
-        archivedNote,
+        toggleArchivateNote,
         setArchivedNotesInView,
     } = notesSlice.actions

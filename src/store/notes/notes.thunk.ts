@@ -1,10 +1,10 @@
-import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore/lite"
+import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { setIsLoading } from "../auth/auth.slice"
 import { activateNote, deactivateNote, deactiveCreateNote } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
-import { addNewNote, addTags, archivedNote, setFilterTag, setNotes, setNotesInView, updateNotes, type Note } from "./notes.slice"
+import { addNewNote, addTags, setArchivedNotesInView, setFilterTag, setNotes, setNotesInView, toggleArchivateNote, updateNotes, type Note } from "./notes.slice"
 import type { RootState } from "../store"
 
 export const startCreatingNote = ( newNote: Partial<Note> ) => {
@@ -122,7 +122,7 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
     }
 }
 
-export const startArchivatingNote = ( data: { archived: boolean } ) => {
+export const startArchivatingNote = () => {
     return async ( dispatch: Dispatch, getState: () => RootState ) => {
 
         dispatch( setIsLoading( true ) )
@@ -134,9 +134,9 @@ export const startArchivatingNote = ( data: { archived: boolean } ) => {
         try {
         
             const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${uid}`)
-            await setDoc( noteRef, data, { merge: true } )
+            await setDoc( noteRef, { archived: true }, { merge: true } )
 
-            dispatch( archivedNote( uid ) )
+            dispatch( toggleArchivateNote( uid ) )
             dispatch( deactivateNote() )
             dispatch( setFilterTag("") )
             dispatch( setNotesInView() )
@@ -144,6 +144,32 @@ export const startArchivatingNote = ( data: { archived: boolean } ) => {
         } catch( error ) {
             console.log('Error al archivar la nota', error)
         }
+        
+        dispatch( setIsLoading( false ) )
+
+    }
+}
+
+export const startRestoringNote = ( noteId: string ) => {
+    return async ( dispatch: Dispatch, getState: () => RootState ) => {
+
+        dispatch( setIsLoading( true ) )
+        const { uid } = getState().auth
+
+        try {
+            
+            const noteRef = doc( FirebaseDB, `notes-app/${uid}/notes/${noteId}`)
+            await setDoc( noteRef, { archived: false }, { merge: true })
+
+            dispatch( toggleArchivateNote( noteId ) )
+            dispatch( setFilterTag("") )
+            dispatch( setNotesInView() )
+            dispatch(setArchivedNotesInView())
+
+        } catch (error) {
+            console.log('Error al recuperar nota:', error )
+        }
+
         
         dispatch( setIsLoading( false ) )
 

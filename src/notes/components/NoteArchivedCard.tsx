@@ -19,7 +19,7 @@ export const NoteArchivedCard: React.FC<NoteArchivedCardProps> = ({ note }) => {
             <h2 className='font-semibold mb-2'>{note.title}</h2>
             <p>{textToShowInCard}</p>
             <NoteCardTags tags={note.tags} />
-            <BtnRestoreNote />
+            <BtnRestoreNote noteId={note.uid} />
         </li>
     )
 }
