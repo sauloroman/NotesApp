@@ -5,6 +5,7 @@ import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
 import { useNotes } from '../../hooks'
 import { SelectNoteView } from '../views/SelectNoteView'
+import { TitlePage } from '../../store/ui/ui.slice'
 
 export const NotesPage: React.FC = () => {
   const { 
@@ -13,9 +14,11 @@ export const NotesPage: React.FC = () => {
     viewNote: { isOpen: isOpenNote }
   } = useUi()
   const { getNotes } = useNotes()
+  const { onSetTitlePage } = useUi()
 
   useEffect(() => {
     getNotes()
+    onSetTitlePage(TitlePage.allNotes)
   }, [])
 
   return (
@@ -25,7 +28,7 @@ export const NotesPage: React.FC = () => {
           <button onClick={openCreateNote} className='mb-4 bg-violet-500 cursor-pointer text-white rounded-md p-2 hover:bg-violet-600 transition-colors duration-200 text-sm w-full'>    
             Crear una nueva nota
           </button>
-          <NotesList />
+          <NotesList /> 
         </div>
         <div className="col-span-3">
 

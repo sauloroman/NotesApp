@@ -1,8 +1,13 @@
 import React from 'react'
 import logo from '../../assets/img/logo-notes.png'
 import { TagList, MenuPages } from './'
+import { useUi } from '../../hooks'
+import { TitlePage } from '../../store/ui/ui.slice'
 
 export const AsideMenu: React.FC = () => {
+
+  const { titlePage } = useUi()
+
   return (
     <aside className='fixed top-0 left-0 h-screen bg-white w-64 border-r border-gray-300 p-4'>
         <div className="flex h-16"> 
@@ -12,7 +17,7 @@ export const AsideMenu: React.FC = () => {
             <MenuPages />
         </div>
         <div className='pt-4'>
-            <TagList />
+          { titlePage === TitlePage.allNotes && <TagList />}
         </div>
     </aside>
   )

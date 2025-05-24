@@ -51,8 +51,7 @@ export const startGettingNotes = () => {
         try {
 
             const notesRef = collection( FirebaseDB, `notes-app/${uid}/notes`)
-            const notesNoArchived = query( notesRef, where('archived', '==', false) )
-            const docs = await getDocs( notesNoArchived )
+            const docs = await getDocs( notesRef )
 
             let notes: Note[] = []
             docs.forEach( (doc) => {
@@ -71,6 +70,7 @@ export const startGettingNotes = () => {
             })
 
             dispatch( setNotes( notes ) )
+            dispatch( setNotesInView() )
 
         } catch (error) {
             console.log(error)

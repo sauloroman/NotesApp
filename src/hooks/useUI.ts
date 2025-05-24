@@ -6,7 +6,8 @@ import {
     deactiveSkeletonCreateNote, 
     activateNote, 
     deactivateNote, 
-    deactiveCreateNote 
+    deactiveCreateNote, 
+    setTitlePage
 } from "../store/ui/ui.slice"
 import type { Note } from "../store/notes/notes.slice"
 
@@ -14,7 +15,7 @@ export const useUi = () => {
 
     const dispatch = useDispatch<any>()
 
-    const { alert, createNote, viewNote } = useSelector( (state: RootState) => state.ui )
+    const { alert, createNote, viewNote, titlePage } = useSelector( (state: RootState) => state.ui )
 
     const openCreateNote = () => {
         dispatch( deactivateNote() )
@@ -31,13 +32,19 @@ export const useUi = () => {
         dispatch( deactiveCreateNote() )
     }
 
+    const onSetTitlePage = ( title: string ) => {
+        dispatch(setTitlePage(title))
+    }
+
     return {
         alert,
         createNote,
+        titlePage,
         viewNote,
 
         openCreateNote,
         selectNote,
+        onSetTitlePage,
     }
 
 }

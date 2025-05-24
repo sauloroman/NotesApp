@@ -32,7 +32,7 @@
         reducers: {
 
             setNotes: ( state, {payload}: PayloadAction<Note[]> ) => {
-                state.notes = payload   
+                state.notes = payload 
                 state.notesInView = payload
             },
 
@@ -68,6 +68,10 @@
                     state.notesInView = state.notes.filter( note => !note.archived )
                 }
             },
+            
+            setArchivedNotesInView: ( state ) => {
+                state.notesInView = state.notes.filter( note => note.archived )
+            },
 
             archivedNote: ( state, {payload}: PayloadAction<string>) => {
                 state.notes = state.notes.map( note => {
@@ -91,4 +95,5 @@
         setFilterTag,
         setNotesInView,
         archivedNote,
+        setArchivedNotesInView,
     } = notesSlice.actions

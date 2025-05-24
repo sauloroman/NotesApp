@@ -9,7 +9,15 @@ export const AlertType = {
 
 export type AlertType = typeof AlertType[keyof typeof AlertType]
 
+export const TitlePage = {
+    allNotes: "Todas las Notas",
+    archivedNotes: "Notas Archivadas"
+}
+
+export type TitlePage = typeof TitlePage[keyof typeof TitlePage]
+
 interface InitialStateUI {
+    titlePage: TitlePage | string,
     alert: {
         message: string | null,
         type: AlertType,
@@ -26,6 +34,7 @@ interface InitialStateUI {
 }
 
 export const initialState: InitialStateUI = {
+    titlePage: "",
     alert: {
         message: null,
         type: AlertType.info,
@@ -90,6 +99,10 @@ export const uiSlice = createSlice({
             state.viewNote.selected = null
         },
 
+        setTitlePage: ( state, {payload}: PayloadAction<TitlePage>) => {
+            state.titlePage = payload
+        }
+
     }
 })
 
@@ -102,4 +115,5 @@ export const {
     deactiveCreateNote,
     deactiveSkeletonCreateNote,
     deactivateNote,
+    setTitlePage,
 } = uiSlice.actions

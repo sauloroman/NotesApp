@@ -20,7 +20,7 @@ export const FormCreateNote: React.FC = () => {
     formState: { errors }
   } = useForm<FormData>()
 
-  const { createNewNote } = useNotes()
+  const { createNewNote, isLoading } = useNotes()
 
   const onCreateNewNote = ( data: FormData ) => {
     const { tags } = data
@@ -89,7 +89,7 @@ export const FormCreateNote: React.FC = () => {
              { errors.content && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.content.message}</span>}
         </div>
         <div className="p-4 px-6">
-            <button type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
+            <button disabled={isLoading} type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
         </div>
     </form>
   )
