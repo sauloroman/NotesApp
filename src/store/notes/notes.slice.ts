@@ -63,10 +63,20 @@
 
             setNotesInView: ( state ) => {
                 if ( state.filterTag ) {
-                    state.notesInView = state.notes.filter( note => note.tags.includes( state.filterTag! ) )
+                    state.notesInView = state.notes.filter( note => note.tags.includes( state.filterTag! ) && !note.archived )
                 } else {
-                    state.notesInView = [ ...state.notes ]
+                    state.notesInView = state.notes.filter( note => !note.archived )
                 }
+            },
+
+            archivedNote: ( state, {payload}: PayloadAction<string>) => {
+                state.notes = state.notes.map( note => {
+                    if ( note.uid === payload ) return {
+                        ...note,
+                        archived: true,
+                    } 
+                    return note
+                })
             }
 
         }
@@ -80,4 +90,5 @@
         updateNotes,
         setFilterTag,
         setNotesInView,
+        archivedNote,
     } = notesSlice.actions

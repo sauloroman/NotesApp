@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/store"
-import { startCreatingNote, startGettingNotes, startUpdatingNote } from "../store/notes/notes.thunk"
-import { setFilterTag, setNotes, setNotesInView } from "../store/notes/notes.slice"
+import { startArchivatingNote, startCreatingNote, startGettingNotes, startUpdatingNote } from "../store/notes/notes.thunk"
+import { setFilterTag, setNotesInView } from "../store/notes/notes.slice"
 
 export const useNotes = () => {
 
@@ -37,6 +37,11 @@ export const useNotes = () => {
 
     }
 
+    const archivateNote = () => {
+        const noteUpdated = { archived: true }
+        dispatch( startArchivatingNote( noteUpdated ) )
+    }
+
     const getNotes = () => {
         dispatch( startGettingNotes() )
     }
@@ -61,6 +66,7 @@ export const useNotes = () => {
         updateNote,
         setFilter,
         setNotesInPage,
+        archivateNote,
     }
 
 }

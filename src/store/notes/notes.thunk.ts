@@ -1,10 +1,10 @@
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { setIsLoading } from "../auth/auth.slice"
-import { activateNote, deactiveCreateNote } from "../ui/ui.slice"
+import { activateNote, deactivateNote, deactiveCreateNote } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
-import { addNewNote, addTags, setFilterTag, setNotes, setNotesInView, updateNotes, type Note } from "./notes.slice"
+import { addNewNote, addTags, archivedNote, setFilterTag, setNotes, setNotesInView, updateNotes, type Note } from "./notes.slice"
 import type { RootState } from "../store"
 
 export const startCreatingNote = ( newNote: Partial<Note> ) => {
@@ -93,7 +93,7 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
 
         try {
             
-            const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${selected?.uid}` )
+            const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${uid}` )
             await setDoc( noteRef, { ...data }, { merge: true }) 
 
             const newNote: Note = {
@@ -117,6 +117,34 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
             console.log('Error al actualizar la nota: ', error )
         }
 
+        dispatch( setIsLoading( false ) )
+
+    }
+}
+
+export const startArchivatingNote = ( data: { archived: boolean } ) => {
+    return async ( dispatch: Dispatch, getState: () => RootState ) => {
+
+        dispatch( setIsLoading( true ) )
+
+        const { uid: userUid } = getState().auth 
+        const { viewNote: { selected } } = getState().ui
+        const { uid } = selected!
+
+        try {
+        
+            const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${uid}`)
+            await setDoc( noteRef, data, { merge: true } )
+
+            dispatch( archivedNote( uid ) )
+            dispatch( deactivateNote() )
+            dispatch( setFilterTag("") )
+            dispatch( setNotesInView() )
+
+        } catch( error ) {
+            console.log('Error al archivar la nota', error)
+        }
+        
         dispatch( setIsLoading( false ) )
 
     }
