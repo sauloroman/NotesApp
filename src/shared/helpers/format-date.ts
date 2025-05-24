@@ -8,7 +8,7 @@ export const formatDate = ( dateStr: string ): string => {
     ]
 
     const monthName = months[+month - 1] ?? 'mes invalido'
-    const [ year ] = yearContent.split(',')
+    const [ year ] = yearContent?.split(',') ?? []
 
     return `${day} ${monthName} ${year}`
 

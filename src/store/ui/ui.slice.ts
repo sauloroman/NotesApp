@@ -22,7 +22,7 @@ interface InitialStateUI {
     viewNote: {
         selected: Note | null,
         isOpen: boolean,
-    }
+    },
 }
 
 export const initialState: InitialStateUI = {
@@ -38,7 +38,7 @@ export const initialState: InitialStateUI = {
     viewNote: {
         selected: null,
         isOpen: false,
-    }
+    },
 }
 
 export const uiSlice = createSlice({
@@ -88,7 +88,7 @@ export const uiSlice = createSlice({
         deactivateNote: ( state ) => {
             state.viewNote.isOpen = false
             state.viewNote.selected = null
-        }
+        },
 
     }
 })

@@ -12,14 +12,18 @@
 
     interface InitialStateNotes {
         notes: Note[],
+        notesInView: Note[],
         tags: string[],
         isLoading: boolean, 
+        filterTag: string,
     }
 
     const initialState: InitialStateNotes = { 
         notes: [],
+        notesInView: [],
         tags: [],
         isLoading: false,
+        filterTag: "",
     }
 
     export const notesSlice = createSlice({
@@ -29,6 +33,7 @@
 
             setNotes: ( state, {payload}: PayloadAction<Note[]> ) => {
                 state.notes = payload   
+                state.notesInView = payload
             },
 
             setIsLoadingNote: ( state, { payload }: PayloadAction<boolean>) => {
@@ -50,6 +55,18 @@
                     if ( note.uid === payload.uid ) return payload
                     return note
                 })
+            },
+
+            setFilterTag: ( state, { payload }: PayloadAction<string>) => {
+                state.filterTag = payload.toLowerCase()
+            },
+
+            setNotesInView: ( state ) => {
+                if ( state.filterTag ) {
+                    state.notesInView = state.notes.filter( note => note.tags.includes( state.filterTag! ) )
+                } else {
+                    state.notesInView = [ ...state.notes ]
+                }
             }
 
         }
@@ -61,4 +78,6 @@
         addNewNote,
         addTags,
         updateNotes,
+        setFilterTag,
+        setNotesInView,
     } = notesSlice.actions

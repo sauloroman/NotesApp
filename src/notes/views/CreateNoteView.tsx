@@ -3,7 +3,7 @@ import { FormCreateNote } from '../components/FormCreateNote'
 
 export const CreateNoteView: React.FC = () => {
   return (
-    <div className='grid grid-cols-4 h-screen'>
+    <div className='grid grid-cols-4'>
         <div className="col-span-3">
           <FormCreateNote />
         </div>

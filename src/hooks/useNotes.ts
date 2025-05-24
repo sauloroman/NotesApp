@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "../store/store"
 import { startCreatingNote, startGettingNotes, startUpdatingNote } from "../store/notes/notes.thunk"
+import { setFilterTag, setNotes, setNotesInView } from "../store/notes/notes.slice"
 
 export const useNotes = () => {
 
@@ -8,7 +9,9 @@ export const useNotes = () => {
     const {
         isLoading,
         notes,
-        tags
+        notesInView,
+        tags,
+        filterTag
     } = useSelector( (state: RootState) => state.notes )
 
     const createNewNote = ( data: { title: string, content: string, tags: string[]} ) => {
@@ -38,14 +41,26 @@ export const useNotes = () => {
         dispatch( startGettingNotes() )
     }
 
+    const setFilter = ( filter: string ) => {
+        dispatch( setFilterTag( filter ) )
+    }
+    
+    const setNotesInPage = () => {
+       dispatch( setNotesInView() ) 
+    }
+
     return {
         isLoading,
         notes,
+        notesInView,
         tags,
+        filterTag,
 
         createNewNote,
         getNotes,
         updateNote,
+        setFilter,
+        setNotesInPage,
     }
 
 }

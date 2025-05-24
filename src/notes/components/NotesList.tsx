@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NoteCard } from './NoteCard'
 import { useNotes } from '../../hooks'
 
 export const NotesList: React.FC = () => {
 
-  const { notes } = useNotes()
+  const { notesInView, filterTag, setNotesInPage } = useNotes()
+
+  useEffect(() => {
+    setNotesInPage()
+  }, [filterTag])
 
   return (
-    <ul>
+    <ul className='h-[38rem] overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-hide'>
       {
-        notes.length > 0
+        notesInView.length > 0
         ? (
-          notes.map( note => (
+          notesInView.map( note => (
             <NoteCard key={note.uid} note={note} />
           ))
         )

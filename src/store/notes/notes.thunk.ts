@@ -4,7 +4,7 @@ import { setIsLoading } from "../auth/auth.slice"
 import { activateNote, deactiveCreateNote } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
-import { addNewNote, addTags, setNotes, updateNotes, type Note } from "./notes.slice"
+import { addNewNote, addTags, setFilterTag, setNotes, setNotesInView, updateNotes, type Note } from "./notes.slice"
 import type { RootState } from "../store"
 
 export const startCreatingNote = ( newNote: Partial<Note> ) => {
@@ -31,6 +31,8 @@ export const startCreatingNote = ( newNote: Partial<Note> ) => {
             dispatch( addTags(newNote.tags!) )
             dispatch( deactiveCreateNote() ) 
             dispatch( activateNote(newNote as Note) )
+            dispatch( setFilterTag(""))
+            dispatch( setNotesInView() )
 
         } catch (error) {   
             console.log(error)
@@ -85,6 +87,8 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
         const { uid: userUid } = getState().auth
         const { viewNote: { selected } } = getState().ui
 
+        const { uid, createdAt, archived } = selected!
+
         dispatch( setIsLoading(true) )
 
         try {
@@ -93,9 +97,9 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
             await setDoc( noteRef, { ...data }, { merge: true }) 
 
             const newNote: Note = {
-                uid: selected?.uid!,                
-                createdAt: selected?.createdAt!,
-                archived: selected?.archived!,
+                uid: uid,                
+                createdAt: createdAt,
+                archived: archived,
                 content: data.content!,
                 title: data.title!,
                 tags: data.tags!,
@@ -104,8 +108,10 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
 
             dispatch( updateNotes( newNote ) )
             dispatch( activateNote({
-                ...data,
+                ...newNote,
             } as Note))
+            dispatch( setFilterTag(""))
+            dispatch( setNotesInView() )
 
         } catch (error) {
             console.log('Error al actualizar la nota: ', error )

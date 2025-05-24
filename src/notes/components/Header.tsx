@@ -8,7 +8,7 @@ export const Header: React.FC = () => {
   const { goSettings } = useNavigatePage()
 
   return (
-    <header className='w-full border-b border-gray-200 p-4'>
+    <header className='border-b border-gray-200 p-4 h-16 fixed top-0 bg-white w-[calc(100%-16rem)]'>
         
         <div className="flex justify-between items-center">
             <h1 className='font-bold text-2xl'>Todas las Notas</h1>

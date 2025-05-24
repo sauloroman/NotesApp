@@ -17,6 +17,7 @@ export const FormCreateNote: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    formState: { errors }
   } = useForm<FormData>()
 
   const { createNewNote } = useNotes()
@@ -46,22 +47,26 @@ export const FormCreateNote: React.FC = () => {
                     type="text" 
                     className='w-full p-2 border-none text-xl font-bold'
                 />
+                { errors.title && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.title.message}</span>}
             </div>
-            <div className='flex gap-4 mb-4'>
-                <label className='text-sm w-1/8 flex gap-1 items-center'>
-                    <LuTags className='text-gray-500 text-lg' />
-                    Tags
-                </label>
-                <input
-                    {
-                        ...register('tags', {
-                            required: 'Al menos una tag debe crearse',
-                        })
-                    }
-                    placeholder='Añade etiquetas separadolas por comas'
-                    className='w-full p-2 border-none text-gray-500 text-sm' 
-                    type="text" 
-                />
+            <div>
+                <div className='flex gap-4 mb-4'>
+                    <label className='text-sm w-1/8 flex gap-1 items-center'>
+                        <LuTags className='text-gray-500 text-lg' />
+                        Tags
+                    </label>
+                    <input
+                        {
+                            ...register('tags', {
+                                required: 'Al menos una tag debe crearse',
+                            })
+                        }
+                        placeholder='Añade etiquetas separadolas por comas'
+                        className='w-full p-2 border-none text-gray-500 text-sm' 
+                        type="text" 
+                        />
+                </div>
+                { errors.tags && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.tags.message}</span>}
             </div>
             <div className="flex gap-4 text-sm">
                 <div className='flex gap-1 items-center'>
@@ -81,6 +86,7 @@ export const FormCreateNote: React.FC = () => {
                 placeholder='Escribe tu nota aquí...'
                 className='w-full h-96 p-2 border-none text-sm'
             />
+             { errors.content && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.content.message}</span>}
         </div>
         <div className="p-4 px-6">
             <button type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>

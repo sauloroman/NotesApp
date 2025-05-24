@@ -5,7 +5,7 @@ import { FormUpdateNote } from '../components/FormUpdateNote';
 
 export const SelectNoteView: React.FC = () => {
   return (
-    <div className='grid grid-cols-4 h-screen'>
+    <div className='grid grid-cols-4'>
       <div className="col-span-3">
         <FormUpdateNote />
       </div>

@@ -12,7 +12,9 @@ export const NotesLayout: React.FC<NotesLayoutProps> = ({ children }) => {
 
         <div className="ml-64">
             <Header />
-            {children}
+            <div className="mt-16">
+              {children}
+            </div>
         </div>
     </div>
   )
