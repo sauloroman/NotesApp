@@ -1,10 +1,10 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite"
+import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { setIsLoading } from "../auth/auth.slice"
 import { activateNote, deactivateNote, deactiveCreateNote, setRestoreNoteUid } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
-import { addNewNote, addTags, setArchivedNotesInView, setFilterTag, setNotes, setNotesInView, toggleArchivateNote, updateNotes, type Note } from "./notes.slice"
+import { addNewNote, addTags, deleteNote, deleteTags, setArchivedNotesInView, setFilterTag, setNotes, setNotesInView, toggleArchivateNote, updateNotes, type Note } from "./notes.slice"
 import type { RootState } from "../store"
 
 export const startCreatingNote = ( newNote: Partial<Note> ) => {
@@ -73,7 +73,7 @@ export const startGettingNotes = () => {
             dispatch( setNotesInView() )
 
         } catch (error) {
-            console.log(error)
+            throw Error( error as string )
         }
 
         dispatch( setIsLoading(false) )
@@ -107,6 +107,13 @@ export const startUpdatingNote = ( data: Partial<Note> ) => {
             }
 
             dispatch( updateNotes( newNote ) )
+
+            if ( selected!.tags.length > data.tags!.length ) {
+                dispatch( deleteTags( selected!.tags ) )
+            } else {
+                dispatch( addTags( data.tags! ) )
+            }
+
             dispatch( activateNote({
                 ...newNote,
             } as Note))
@@ -129,7 +136,7 @@ export const startArchivatingNote = () => {
 
         const { uid: userUid } = getState().auth 
         const { viewNote: { selected } } = getState().ui
-        const { uid } = selected!
+        const { uid, tags } = selected!
 
         try {
         
@@ -137,6 +144,7 @@ export const startArchivatingNote = () => {
             await setDoc( noteRef, { archived: true }, { merge: true } )
 
             dispatch( toggleArchivateNote( uid ) )
+            dispatch( deleteTags( tags ))
             dispatch( deactivateNote() )
             dispatch( setFilterTag("") )
             dispatch( setNotesInView() )
@@ -173,6 +181,34 @@ export const startRestoringNote = ( noteId: string ) => {
 
         
         dispatch( setIsLoading( false ) )
+
+    }
+}
+
+export const startDeletingNote = () => {
+    return async( dispatch: Dispatch, getState: () => RootState ) => {
+
+        dispatch(setIsLoading( true ))
+
+        const { uid: userUid } = getState().auth
+        const { viewNote: { selected } } = getState().ui
+        const { uid, tags } = selected!
+
+        try {
+            const noteRef = doc( FirebaseDB, `notes-app/${userUid}/notes/${uid}` )
+            await deleteDoc(noteRef)
+
+            dispatch( deleteNote(uid) )
+            dispatch( deleteTags( tags ) )
+            dispatch( setFilterTag("") )
+            dispatch( setNotesInView() )
+            dispatch( deactivateNote() )
+        
+        } catch (error) {
+            console.log('Error al eliminar la nota', error )
+        }   
+
+        dispatch(setIsLoading( false ))
 
     }
 }

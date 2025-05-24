@@ -41,7 +41,7 @@
             },
 
             addNewNote( state, { payload }: PayloadAction<Note> ) {
-                state.notes.push( payload )
+                state.notes.unshift( payload )
             },
 
             addTags: ( state, {payload}: PayloadAction<string[]>) => {
@@ -50,11 +50,29 @@
                 state.tags = Array.from( new Set( combined ) )
             },
 
+            deleteTags: ( state, {payload}: PayloadAction<string[]> ) => {
+                let tagsWithNoNotes: string[] = []
+
+                for( const tag of payload ) {
+                    const isInNote = state.notes.some( (note: Note) => note.tags.includes( tag ) )
+
+                    if ( !isInNote ) {
+                        tagsWithNoNotes.push( tag.replace( tag[0], tag[0].toUpperCase() ) )
+                    } 
+                }
+
+                state.tags = state.tags.filter( tag => !tagsWithNoNotes.includes(tag) )
+            },
+
             updateNotes: ( state, {payload}: PayloadAction<Note> ) => {
                 state.notes = state.notes.map( (note: Note) => {
                     if ( note.uid === payload.uid ) return payload
                     return note
                 })
+            },
+
+            deleteNote: ( state, {payload}: PayloadAction<string> ) => {
+                state.notes = state.notes.filter( notes => notes.uid !== payload )
             },
 
             setFilterTag: ( state, { payload }: PayloadAction<string>) => {
@@ -96,4 +114,6 @@
         setNotesInView,
         toggleArchivateNote,
         setArchivedNotesInView,
+        deleteNote,
+        deleteTags,
     } = notesSlice.actions

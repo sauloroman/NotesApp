@@ -19,7 +19,7 @@ export const SkeletonFormCreateNote: React.FC = () => {
       <div className="p-4 px-6 border-b border-gray-300 animate-pulse">
         <div className="w-full h-96 bg-gray-200 rounded"></div>
       </div>
-      <div className="p-4 px-6 animate-pulse">
+      <div className="p-4 px-6 animate-pulse flex justify-end">
         <div className="w-32 h-8 bg-gray-300 rounded"></div>
       </div>
     </form>

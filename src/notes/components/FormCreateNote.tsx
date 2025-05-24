@@ -88,7 +88,7 @@ export const FormCreateNote: React.FC = () => {
             />
              { errors.content && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.content.message}</span>}
         </div>
-        <div className="p-4 px-6">
+        <div className="p-4 px-6 flex justify-end w-full">
             <button disabled={isLoading} type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
         </div>
     </form>

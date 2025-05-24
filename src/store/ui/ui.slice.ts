@@ -11,7 +11,8 @@ export type AlertType = typeof AlertType[keyof typeof AlertType]
 
 export const TitlePage = {
     allNotes: "Todas las Notas",
-    archivedNotes: "Notas Archivadas"
+    archivedNotes: "Notas Archivadas",
+    settings: "Ajustes del sistema"
 }
 
 export type TitlePage = typeof TitlePage[keyof typeof TitlePage]

@@ -112,7 +112,7 @@ export const FormUpdateNote: React.FC = () => {
                 />
                 { errors.content && <span className='text-red-500 text-right block pt-1 text-sm'>{errors.content.message}</span>}
             </div>
-            <div className="p-4 px-6">
+            <div className="p-4 px-6 flex justify-end">
                 <button disabled={isLoading} type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Actualizar Nota</button>
             </div>
         </form>

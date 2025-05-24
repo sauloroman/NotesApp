@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { NotesLayout } from '../layout/NotesLayout'
-import { NotesList, SkeletonFormCreateNote, ModalConfirmArchivateNote } from '../components'
+import { NotesList, SkeletonFormCreateNote, ModalConfirmArchivateNote, ModalConfirmDeleteNote } from '../components'
 import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
 import { useNotes } from '../../hooks'
@@ -32,12 +32,20 @@ export const NotesPage: React.FC = () => {
         </div>
         <div className="col-span-3">
 
-          { skeletonActive && <SkeletonFormCreateNote /> }
-          { isOpenCreateNote && <CreateNoteView /> }
-          { isOpenNote && <SelectNoteView />}
+          { skeletonActive 
+            ? <SkeletonFormCreateNote /> 
+            : (
+              <>
+                { isOpenCreateNote && <CreateNoteView /> }
+                { isOpenNote && <SelectNoteView />}
+              </>
+            )
+          }
+
         </div>
       </div>
       { modal.isOpen && modal.modalName === ModalName.archivateNote && <ModalConfirmArchivateNote />}
+      { modal.isOpen && modal.modalName === ModalName.deleteNote && <ModalConfirmDeleteNote />}
     </NotesLayout>
   )
 }
