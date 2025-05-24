@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite"
 import { FirebaseDB } from "../../firebase/config"
 import { setIsLoading } from "../auth/auth.slice"
-import { activateNote, deactivateNote, deactiveCreateNote } from "../ui/ui.slice"
+import { activateNote, deactivateNote, deactiveCreateNote, setRestoreNoteUid } from "../ui/ui.slice"
 
 import type { Dispatch } from "@reduxjs/toolkit"
 import { addNewNote, addTags, setArchivedNotesInView, setFilterTag, setNotes, setNotesInView, toggleArchivateNote, updateNotes, type Note } from "./notes.slice"
@@ -164,6 +164,7 @@ export const startRestoringNote = ( noteId: string ) => {
             dispatch( toggleArchivateNote( noteId ) )
             dispatch( setFilterTag("") )
             dispatch( setNotesInView() )
+            dispatch( setRestoreNoteUid("") )
             dispatch(setArchivedNotesInView())
 
         } catch (error) {

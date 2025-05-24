@@ -16,12 +16,26 @@ export const TitlePage = {
 
 export type TitlePage = typeof TitlePage[keyof typeof TitlePage]
 
+export const ModalName = {
+    noModal: 'No Modal',
+    archivateNote: 'Archivar Nota',
+    restoreNote: 'Recuerar Nota',
+    deleteNote: 'Eliminar Nota'
+}
+
+export type ModalName = typeof ModalName[keyof typeof ModalName]
+
 interface InitialStateUI {
     titlePage: TitlePage | string,
+    restoreNoteUid: string,
     alert: {
         message: string | null,
         type: AlertType,
         isAlertOpen: boolean,
+    },
+    modal: {
+        isOpen: boolean,
+        modalName: ModalName
     },
     createNote: {
         skeletonActive: boolean,
@@ -35,10 +49,15 @@ interface InitialStateUI {
 
 export const initialState: InitialStateUI = {
     titlePage: "",
+    restoreNoteUid: "",
     alert: {
         message: null,
         type: AlertType.info,
         isAlertOpen: false,
+    },
+    modal: {
+        isOpen: false,
+        modalName: ModalName.noModal
     },
     createNote: {
         skeletonActive: false,
@@ -48,6 +67,7 @@ export const initialState: InitialStateUI = {
         selected: null,
         isOpen: false,
     },
+    
 }
 
 export const uiSlice = createSlice({
@@ -101,10 +121,28 @@ export const uiSlice = createSlice({
 
         setTitlePage: ( state, {payload}: PayloadAction<TitlePage>) => {
             state.titlePage = payload
+        },
+
+        openModal: ( state, {payload}: PayloadAction<ModalName> ) => {
+            state.modal = {
+                isOpen: true,
+                modalName: payload,
+            }
+        },
+        
+        closeModal: ( state ) => {
+            state.modal = {
+                isOpen: false,
+                modalName: ModalName.noModal
+            }
+        },
+
+        setRestoreNoteUid: ( state, {payload}: PayloadAction<string>) => {
+            state.restoreNoteUid = payload
         }
 
     }
-})
+})  
 
 export const {
     showAlert,
@@ -116,4 +154,7 @@ export const {
     deactiveSkeletonCreateNote,
     deactivateNote,
     setTitlePage,
+    openModal,
+    closeModal,
+    setRestoreNoteUid,
 } = uiSlice.actions

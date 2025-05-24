@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { NotesLayout } from '../layout/NotesLayout'
-import { NotesList, SkeletonFormCreateNote } from '../components'
+import { NotesList, SkeletonFormCreateNote, ModalConfirmArchivateNote } from '../components'
 import { useUi } from '../../hooks/useUI'
 import { CreateNoteView } from '../views/CreateNoteView'
 import { useNotes } from '../../hooks'
 import { SelectNoteView } from '../views/SelectNoteView'
-import { TitlePage } from '../../store/ui/ui.slice'
+import { ModalName, TitlePage } from '../../store/ui/ui.slice'
 
 export const NotesPage: React.FC = () => {
   const { 
@@ -14,7 +14,7 @@ export const NotesPage: React.FC = () => {
     viewNote: { isOpen: isOpenNote }
   } = useUi()
   const { getNotes } = useNotes()
-  const { onSetTitlePage } = useUi()
+  const { onSetTitlePage, modal } = useUi()
 
   useEffect(() => {
     getNotes()
@@ -37,6 +37,7 @@ export const NotesPage: React.FC = () => {
           { isOpenNote && <SelectNoteView />}
         </div>
       </div>
+      { modal.isOpen && modal.modalName === ModalName.archivateNote && <ModalConfirmArchivateNote />}
     </NotesLayout>
   )
 }

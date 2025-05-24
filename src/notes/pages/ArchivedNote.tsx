@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { NotesLayout } from '../layout/NotesLayout'
 import { useNotes, useUi } from '../../hooks'
-import { TitlePage } from '../../store/ui/ui.slice'
-import { NotesArchivedList } from '../components'
+import { ModalName, TitlePage } from '../../store/ui/ui.slice'
+import { NotesArchivedList, ModalRestoreNote } from '../components'
 
 export const ArchivedNote: React.FC = () => {
   
   const { getArchivedNotes } = useNotes()
-  const { onSetTitlePage } = useUi()
+  const { onSetTitlePage, modal } = useUi()
 
   useEffect(() => {
     onSetTitlePage(TitlePage.archivedNotes)
@@ -19,6 +19,7 @@ export const ArchivedNote: React.FC = () => {
       <div className="p-4">
         <NotesArchivedList />
       </div>
+      { modal.isOpen && modal.modalName === ModalName.restoreNote && <ModalRestoreNote />}
     </NotesLayout>
   )
 }

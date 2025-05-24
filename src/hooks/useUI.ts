@@ -7,7 +7,11 @@ import {
     activateNote, 
     deactivateNote, 
     deactiveCreateNote, 
-    setTitlePage
+    setTitlePage,
+    ModalName,
+    openModal,
+    closeModal,
+    setRestoreNoteUid
 } from "../store/ui/ui.slice"
 import type { Note } from "../store/notes/notes.slice"
 
@@ -15,7 +19,7 @@ export const useUi = () => {
 
     const dispatch = useDispatch<any>()
 
-    const { alert, createNote, viewNote, titlePage } = useSelector( (state: RootState) => state.ui )
+    const { alert, createNote, viewNote, titlePage, modal, restoreNoteUid } = useSelector( (state: RootState) => state.ui )
 
     const openCreateNote = () => {
         dispatch( deactivateNote() )
@@ -36,15 +40,32 @@ export const useUi = () => {
         dispatch(setTitlePage(title))
     }
 
+    const showModal = ( name: ModalName ) => {
+        dispatch( openModal(name) )
+    }
+
+    const hideModal =  () => {
+        dispatch( closeModal() )
+    }
+
+    const onSetRestoreNoteUid = ( noteId: string ) => {
+        dispatch(setRestoreNoteUid( noteId ))
+    }
+
     return {
+        modal,
         alert,
         createNote,
         titlePage,
         viewNote,
-
+        restoreNoteUid,
+        
+        onSetRestoreNoteUid,
         openCreateNote,
         selectNote,
         onSetTitlePage,
+        showModal,
+        hideModal,
     }
 
 }
