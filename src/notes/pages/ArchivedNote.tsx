@@ -16,7 +16,7 @@ export const ArchivedNote: React.FC = () => {
 
   return (
     <NotesLayout>
-      <div className="p-4">
+      <div className="p-4 dark:bg-gray-900 h-screen">
         <NotesArchivedList />
       </div>
       { modal.isOpen && modal.modalName === ModalName.restoreNote && <ModalRestoreNote />}

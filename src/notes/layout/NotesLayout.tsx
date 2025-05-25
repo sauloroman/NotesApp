@@ -7,7 +7,7 @@ interface NotesLayoutProps {
 
 export const NotesLayout: React.FC<NotesLayoutProps> = ({ children }) => {
   return (
-    <div>
+    <>
         <AsideMenu />
 
         <div className="ml-64">
@@ -16,6 +16,6 @@ export const NotesLayout: React.FC<NotesLayoutProps> = ({ children }) => {
               {children}
             </div>
         </div>
-    </div>
+    </>
   )
 }

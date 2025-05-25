@@ -7,7 +7,7 @@ export const SelectNoteView: React.FC = () => {
       <div className="col-span-3">
         <FormUpdateNote />
       </div>
-      <div className="col-span-1 p-4 border-l border-gray-300">
+      <div className="col-span-1 p-4 border-l border-gray-300 dark:border-gray-700">
         <div className="flex flex-col gap-2">
           <BtnArchivateNote />
           <BtnDeleteNote />

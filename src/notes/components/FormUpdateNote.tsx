@@ -46,7 +46,7 @@ export const FormUpdateNote: React.FC = () => {
 
   return (
     <form onSubmit={ handleSubmit( onUpdateNote ) }>
-            <fieldset className='border-b border-gray-300 p-4 px-6'>    
+            <fieldset className='border-b border-gray-300 dark:border-gray-700 dark:text-white p-4 px-6'>    
                 <div className='mb-4'>
                     <input
                         {
@@ -62,12 +62,12 @@ export const FormUpdateNote: React.FC = () => {
                         type="text" 
                         className='w-full p-2 border-none text-xl font-bold'
                     />
-                    { errors.title && <span className='text-red-500 text-right block pt-1 text-sm'>{errors.title?.message}</span>}
+                    { errors.title && <span className='text-red-500 text-right block pt-1 text-sm dark:text-red-400'>{errors.title?.message}</span>}
                 </div>
                 <div>
                     <div className='flex gap-4 mb-4'>
-                        <label className='text-sm w-1/8 flex gap-1 items-center'>
-                            <LuTags className='text-gray-500 text-lg' />
+                        <label className='dark:font-bold text-sm w-1/8 flex gap-1 items-center'>
+                            <LuTags className='text-gray-500 dark:text-white text-lg' />
                             Tags
                         </label>
                         <input
@@ -77,30 +77,30 @@ export const FormUpdateNote: React.FC = () => {
                                 })
                             }
                             placeholder='Añade etiquetas separadolas por comas'
-                            className='w-full p-2 border-none text-gray-500 text-sm' 
+                            className='w-full dark:text-gray-200 p-2 border-none text-gray-500 text-sm' 
                             type="text" 
                         />
                     </div>
-                    { errors.tags && <span className='text-red-500 text-right block pt-1 text-sm'>{errors.tags.message}</span>}
+                    { errors.tags && <span className='text-red-500 text-right block pt-1 text-sm dark:text-red-400'>{errors.tags.message}</span>}
                 </div>
                 <div className='flex gap-4 items-center'>
                   <div className="flex gap-4 text-sm">
-                      <div className='flex gap-1 items-center'>
-                          <GoClock className='text-gray-500 text-lg' />   
+                      <div className='flex gap-1 items-center dark:font-bold'>
+                          <GoClock className='dark:text-white text-gray-500 text-lg' />   
                           Última modificación:
                       </div>
-                      <span className='text-gray-500'>{ formatDate(updatedAt) }</span>
+                      <span className='text-gray-500 dark:text-gray-200'>{ formatDate(updatedAt) }</span>
                   </div>
                   <div className="flex gap-4 text-sm">
-                      <div className='flex gap-1 items-center'>
-                          <GoClock className='text-gray-500 text-lg' />   
+                      <div className='flex gap-1 items-center dark:font-bold'>
+                          <GoClock className='dark:text-white text-gray-500 text-lg' />   
                           Creado:
                       </div>
-                      <span className='text-gray-500'>{ formatDate(createdAt) }</span>
+                      <span className='text-gray-500 dark:text-gray-200'>{ formatDate(createdAt) }</span>
                   </div>
                 </div>
             </fieldset>
-            <div className='p-4 px-6 border-b border-gray-300'>
+            <div className='p-4 px-6 border-b border-gray-300 dark:border-gray-700'>
                 <textarea
                     {
                         ...register('content', { 
@@ -108,12 +108,12 @@ export const FormUpdateNote: React.FC = () => {
                         })
                     }
                     placeholder='Escribe tu nota aquí...'
-                    className='w-full h-96 p-2 border-none text-sm'
+                    className='w-full h-96 p-2 border-none text-sm dark:placeholder:text-white dark:text-white'
                 />
-                { errors.content && <span className='text-red-500 text-right block pt-1 text-sm'>{errors.content.message}</span>}
+                { errors.content && <span className='text-red-500 text-right block pt-1 text-sm dark:text-red-400'>{errors.content.message}</span>}
             </div>
             <div className="p-4 px-6 flex justify-end">
-                <button disabled={isLoading} type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Actualizar Nota</button>
+                <button disabled={isLoading} type='submit' className='bg-gray-800 dark:bg-violet-500 dark:hover:bg-violet-800 transition-colors duration-200  p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Actualizar Nota</button>
             </div>
         </form>
   )

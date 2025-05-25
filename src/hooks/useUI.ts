@@ -11,7 +11,9 @@ import {
     ModalName,
     openModal,
     closeModal,
-    setRestoreNoteUid
+    setRestoreNoteUid,
+    setTheme,
+    setFont
 } from "../store/ui/ui.slice"
 import type { Note } from "../store/notes/notes.slice"
 
@@ -19,7 +21,7 @@ export const useUi = () => {
 
     const dispatch = useDispatch<any>()
 
-    const { alert, createNote, viewNote, titlePage, modal, restoreNoteUid } = useSelector( (state: RootState) => state.ui )
+    const { alert, createNote, viewNote, titlePage, modal, restoreNoteUid, theme, font } = useSelector( (state: RootState) => state.ui )
 
     const openCreateNote = () => {
         dispatch( deactivateNote() )
@@ -52,6 +54,22 @@ export const useUi = () => {
         dispatch(setRestoreNoteUid( noteId ))
     }
 
+    const onSetFont = ( font: string ) => {
+        dispatch( setFont(font))
+        localStorage.setItem('notes-font', JSON.stringify(font) )
+    }
+
+    const onSetTheme = ( theme: string ) => {
+        dispatch( setTheme( theme ) )
+        localStorage.setItem('notes-theme', JSON.stringify( theme ))
+        
+        if ( theme === 'light' ) {
+            document.documentElement.classList.remove('dark')
+        }
+
+        document.documentElement.classList.add(theme)
+    }
+
     return {
         modal,
         alert,
@@ -59,6 +77,8 @@ export const useUi = () => {
         titlePage,
         viewNote,
         restoreNoteUid,
+        theme,
+        font,
         
         onSetRestoreNoteUid,
         openCreateNote,
@@ -66,6 +86,8 @@ export const useUi = () => {
         onSetTitlePage,
         showModal,
         hideModal,
+        onSetFont,
+        onSetTheme,
     }
 
 }

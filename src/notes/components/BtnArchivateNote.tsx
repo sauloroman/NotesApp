@@ -11,7 +11,7 @@ export const BtnArchivateNote: React.FC = () => {
     }    
 
     return (
-        <button onClick={onShowModal} className='p-2 flex items-center gap-3 text-sm text-gray-800 cursor-pointer hover:bg-violet-50'>
+        <button onClick={onShowModal} className='dark:text-white transition-colors duration-200 dark:hover:bg-gray-700 p-2 flex items-center gap-3 text-sm text-gray-800 cursor-pointer hover:bg-violet-50'>
             <RiArchiveDrawerLine />
             Archivar Nota
         </button>

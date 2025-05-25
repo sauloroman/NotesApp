@@ -31,7 +31,7 @@ export const FormCreateNote: React.FC = () => {
 
   return (
     <form onSubmit={ handleSubmit( onCreateNewNote ) }>
-        <fieldset className='border-b border-gray-300 p-4 px-6'>    
+        <fieldset className='border-b border-gray-300 dark:border-gray-700 dark:text-white p-4 px-6'>    
             <div className='mb-4'>
                 <input
                     {
@@ -45,14 +45,14 @@ export const FormCreateNote: React.FC = () => {
                     }
                     placeholder='Título de la nota...'
                     type="text" 
-                    className='w-full p-2 border-none text-xl font-bold'
+                    className='w-full p-2 border-none text-xl font-bold dark:text-gray-200' 
                 />
-                { errors.title && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.title.message}</span>}
+                { errors.title && <span className='text-red-500 text-right block pt-1 text-xs dark:text-red-400'>{errors.title.message}</span>}
             </div>
             <div>
                 <div className='flex gap-4 mb-4'>
-                    <label className='text-sm w-1/8 flex gap-1 items-center'>
-                        <LuTags className='text-gray-500 text-lg' />
+                    <label className='text-sm w-1/8 flex gap-1 items-center dark:font-bold'>
+                        <LuTags className='text-gray-500 text-lg dark:text-white' />
                         Tags
                     </label>
                     <input
@@ -61,22 +61,23 @@ export const FormCreateNote: React.FC = () => {
                                 required: 'Al menos una tag debe crearse',
                             })
                         }
+                        autoComplete='off'
                         placeholder='Añade etiquetas separadolas por comas'
-                        className='w-full p-2 border-none text-gray-500 text-sm' 
+                        className='w-full p-2 border-none text-gray-500 dark:text-gray-200 text-sm' 
                         type="text" 
-                        />
+                    />
                 </div>
-                { errors.tags && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.tags.message}</span>}
+                { errors.tags && <span className='text-red-500 text-right block pt-1 text-xs dark:text-red-400'>{errors.tags.message}</span>}
             </div>
             <div className="flex gap-4 text-sm">
-                <div className='flex gap-1 items-center'>
-                    <GoClock className='text-gray-500 text-lg' />   
+                <div className='flex gap-1 items-center dark:font-bold'>
+                    <GoClock className='text-gray-500 text-lg dark:text-white' />   
                     Última modificación:
                 </div>
-                <span className='text-gray-500'>Sin Editar</span>
+                <span className='text-gray-500 dark:text-gray-200'>Sin Editar</span>
             </div>
         </fieldset>
-        <div className='p-4 px-6 border-b border-gray-300'>
+        <div className='p-4 px-6 border-b border-gray-300 dark:border-gray-700'>
             <textarea
                 {
                     ...register('content', { 
@@ -86,10 +87,10 @@ export const FormCreateNote: React.FC = () => {
                 placeholder='Escribe tu nota aquí...'
                 className='w-full h-96 p-2 border-none text-sm'
             />
-             { errors.content && <span className='text-red-500 text-right block pt-1 text-xs'>{errors.content.message}</span>}
+             { errors.content && <span className='text-red-500 text-right block pt-1 text-xs dark:text-red-400'>{errors.content.message}</span>}
         </div>
         <div className="p-4 px-6 flex justify-end w-full">
-            <button disabled={isLoading} type='submit' className='bg-gray-800 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
+            <button disabled={isLoading} type='submit' className='bg-gray-800 dark:bg-violet-500 dark:hover:bg-violet-800 transition-colors duration-200 p-2 rounded-sm text-white text-sm cursor-pointer hover:bg-gray-700'>Crear Nota</button>
         </div>
     </form>
   )

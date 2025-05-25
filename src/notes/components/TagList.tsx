@@ -8,7 +8,7 @@ export const TagList: React.FC = () => {
 
     return (
         <div className='text-sm h-[30rem] overflow-y-auto  [&::-webkit-scrollbar]:hidden scrollbar-hide'>
-            <h2 className='font-semibold text-gray-500 mb-4'>Tags</h2>
+            <h2 className='font-semibold text-gray-500 mb-4 dark:text-white'>Tags</h2>
             <ul className='flex flex-col gap-2'>
                 <li
                     onClick={() => setFilter("")}
@@ -21,7 +21,9 @@ export const TagList: React.FC = () => {
                             transition-colors 
                             duration-200
                             hover:bg-amber-100
-                            ${filterTag === "" && 'bg-amber-100'}
+                            dark:text-white
+                            hover:dark:bg-sky-800
+                             ${filterTag === '' && 'bg-amber-100 dark:bg-sky-800'}
                         `}>
                     Sin filtros
                 </li>
@@ -38,7 +40,9 @@ export const TagList: React.FC = () => {
                             transition-colors 
                             duration-200
                             hover:bg-amber-100
-                            ${filterTag === tag.toLowerCase() && 'bg-amber-100'}
+                            dark:text-white
+                            hover:dark:bg-sky-800
+                            ${filterTag === tag.toLowerCase() && 'bg-amber-100 dark:bg-sky-800'}
                         `}>
                             <IoPricetagOutline />
                             {tag}

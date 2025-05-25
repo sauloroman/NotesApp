@@ -15,8 +15,8 @@ export const SettingsPage: React.FC = () => {
 
   return (
     <NotesLayout>
-      <div className='h-screen grid grid-cols-4'>
-        <div className="col-span-1 p-6 border-r border-gray-300">
+      <div className='h-screen grid grid-cols-4 dark:bg-gray-900 dark:text-white'>
+        <div className="col-span-1 p-6 border-r border-gray-300 dark:border-gray-700">
           <h2 className='text-sm font-semibold mb-6'>Menu de opciones</h2>
           <SettingsMenu 
             viewName={viewName}

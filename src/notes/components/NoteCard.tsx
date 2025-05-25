@@ -20,10 +20,10 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
   }
 
   return (
-    <li onClick={ onSelectNote } className={`p-4 cursor-pointer transition-all hover:bg-sky-100 mb-2 ${uid === note.uid && 'bg-sky-100'}`}>
+    <li onClick={ onSelectNote } className={`dark:bg-gray-900 dark:text-white p-4 cursor-pointer transition-all dark:hover:bg-gray-800 hover:bg-sky-100 mb-2 ${uid === note.uid && 'bg-sky-100'}`}>
       <h3 className='text-sm font-semibold mb-2'>{title}</h3>
       <NoteCardTags tags={ tags } />
-      <p className='text-[10px] text-gray-600 font-semibold'>{ dateFormatted }</p>
+      <p className='text-[10px] text-gray-600 font-semibold dark:text-gray-400'>{ dateFormatted }</p>
     </li>
   )
 }

@@ -29,6 +29,8 @@ export type ModalName = typeof ModalName[keyof typeof ModalName]
 interface InitialStateUI {
     titlePage: TitlePage | string,
     restoreNoteUid: string,
+    theme: string,
+    font: string,
     alert: {
         message: string | null,
         type: AlertType,
@@ -51,6 +53,8 @@ interface InitialStateUI {
 export const initialState: InitialStateUI = {
     titlePage: "",
     restoreNoteUid: "",
+    theme: 'light',
+    font: 'poppins',
     alert: {
         message: null,
         type: AlertType.info,
@@ -140,6 +144,14 @@ export const uiSlice = createSlice({
 
         setRestoreNoteUid: ( state, {payload}: PayloadAction<string>) => {
             state.restoreNoteUid = payload
+        },
+
+        setTheme: ( state, {payload}: PayloadAction<string> ) => {
+            state.theme = payload
+        },
+
+        setFont: ( state, {payload}: PayloadAction<string>) => {
+            state.font = payload
         }
 
     }
@@ -158,4 +170,6 @@ export const {
     openModal,
     closeModal,
     setRestoreNoteUid,
+    setTheme,
+    setFont,
 } = uiSlice.actions

@@ -12,7 +12,7 @@ export const BtnDeleteNote: React.FC = () => {
     }
 
     return (
-        <button onClick={onShowDeleteModal} className='p-2 flex items-center gap-3 text-sm text-gray-800 cursor-pointer hover:bg-violet-50'>
+        <button onClick={onShowDeleteModal} className='dark:text-white transition-colors duration-200 dark:hover:bg-gray-700 p-2 flex items-center gap-3 text-sm text-gray-800 cursor-pointer hover:bg-violet-50'>
             <FaRegTrashAlt />
             Eliminar Nota
         </button>

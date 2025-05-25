@@ -19,7 +19,7 @@ export const BtnRestoreNote: React.FC<BtnRestoreNoteProps> = ({ noteId }) => {
   return (
     <button 
     onClick={ onRestoreNote } 
-      className='absolute bottom-5 right-5 cursor-pointer transition-colors duration-200 p-2 rounded-full hover:bg-violet-100'>
+      className='absolute bottom-5 right-5 cursor-pointer transition-colors duration-200 p-2 rounded-full hover:bg-violet-100 dark:hover:bg-gray-700'>
         <LuArchiveRestore className='text-lg' />
     </button>
   )
