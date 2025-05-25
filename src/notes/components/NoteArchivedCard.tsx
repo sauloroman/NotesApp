@@ -15,7 +15,7 @@ export const NoteArchivedCard: React.FC<NoteArchivedCardProps> = ({ note }) => {
     }, [note])
 
     return (
-        <li className='relative h-40 p-4 border border-gray-300 w-64 text-xs flex flex-col gap-2'>
+        <li className='relative h-40 p-4 bg-gray-200 rounded-md border border-gray-300 w-64 text-xs flex flex-col gap-2'>
             <h2 className='font-semibold mb-2'>{note.title}</h2>
             <p>{textToShowInCard}</p>
             <NoteCardTags tags={note.tags} />

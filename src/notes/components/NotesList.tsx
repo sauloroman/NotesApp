@@ -11,7 +11,7 @@ export const NotesList: React.FC = () => {
   }, [filterTag])
 
   return (
-    <ul className='h-[38rem] overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-hide'>
+    <ul className='h-min-screen overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-hide'>
       {
         notesInView.length > 0
         ? (

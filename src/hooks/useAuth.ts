@@ -32,7 +32,7 @@ export const useAuth = () => {
 
     const checkAuth = () => {
         onAuthStateChanged( FirebaseAuth, async (user) => {
-            if (!user) dispatch( logout() )
+            if (!user) return dispatch( logout() )
 
             const { displayName, email, photoURL, uid } = user!
 

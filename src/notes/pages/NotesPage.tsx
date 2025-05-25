@@ -13,17 +13,19 @@ export const NotesPage: React.FC = () => {
     createNote: { isOpen: isOpenCreateNote, skeletonActive },
     viewNote: { isOpen: isOpenNote }
   } = useUi()
-  const { getNotes } = useNotes()
+  const { getNotes, notes } = useNotes()
   const { onSetTitlePage, modal } = useUi()
 
   useEffect(() => {
-    getNotes()
+    if ( notes.length === 0 ) {
+      getNotes()
+    }
     onSetTitlePage(TitlePage.allNotes)
   }, [])
 
   return (
     <NotesLayout>
-      <div className="grid w-full grid-cols-4">
+      <div className="grid w-full grid-cols-4 min-h-screen">
         <div className='col-span-1 border-r border-gray-300 p-4'>
           <button onClick={openCreateNote} className='mb-4 bg-violet-500 cursor-pointer text-white rounded-md p-2 hover:bg-violet-600 transition-colors duration-200 text-sm w-full'>    
             Crear una nueva nota
