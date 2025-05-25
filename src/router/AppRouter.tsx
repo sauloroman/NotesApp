@@ -20,7 +20,7 @@ export const AppRouter: React.FC = () => {
           ? ( <Route path="/*" element={<NotesRouter />} /> )
           : ( <Route path='/auth/*' element={<AuthRouter />} /> )
         }
-        <Route path='/*' element={<Navigate to={'/'} />} />
+        <Route path='/*' element={<Navigate to={'/auth/login'} />} />
        
     </Routes>
   )

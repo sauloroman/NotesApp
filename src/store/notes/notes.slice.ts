@@ -36,6 +36,14 @@
                 state.notesInView = payload
             },
 
+            resetNotes: ( state ) => {
+                state.notes = []
+                state.notesInView = []
+                state.tags = []
+                state.isLoading = false
+                state.filterTag = ""
+            },
+
             setIsLoadingNote: ( state, { payload }: PayloadAction<boolean>) => {
                 state.isLoading = payload
             },
@@ -116,4 +124,5 @@
         setArchivedNotesInView,
         deleteNote,
         deleteTags,
+        resetNotes,
     } = notesSlice.actions

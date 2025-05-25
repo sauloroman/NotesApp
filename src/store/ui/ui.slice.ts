@@ -80,6 +80,30 @@ export const uiSlice = createSlice({
     name: "ui", 
     reducers: {
 
+        resetUi: ( state ) => {
+            state.titlePage = ""
+            state.restoreNoteUid = ""
+            state.theme = 'light'
+            state.font = 'poppins'
+            state.alert = {
+                message: null,
+                type: AlertType.info,
+                isAlertOpen: false,
+            }
+            state.modal = {
+                isOpen: false,
+                modalName: ModalName.noModal
+            }
+            state.createNote = {
+                skeletonActive: false,
+                isOpen: false,
+            }
+            state.viewNote = {
+                selected: null,
+                isOpen: false,
+            }
+        },
+
         showAlert: ( state, { payload }: PayloadAction<{ message: string, type: AlertType }> ) => {
             const { message, type } = payload
 
@@ -172,4 +196,5 @@ export const {
     setRestoreNoteUid,
     setTheme,
     setFont,
+    resetUi,
 } = uiSlice.actions

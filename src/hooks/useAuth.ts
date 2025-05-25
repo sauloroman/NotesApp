@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import type { LoginWithEmailAndPassword, RegisterUserWithEmail } from "../firebase/provider"
-import { startCreatingUserWithEmail, startLoggingWithEmail, startLoggingWithGoogle } from "../store/auth/auth.thunk"
+import { type LoginWithEmailAndPassword, type RegisterUserWithEmail } from "../firebase/provider"
+import { startCreatingUserWithEmail, startLoggingOut, startLoggingWithEmail, startLoggingWithGoogle } from "../store/auth/auth.thunk"
 import type { RootState } from "../store/store"
 import { onAuthStateChanged } from "firebase/auth"
 import { FirebaseAuth } from "../firebase/config"
@@ -45,6 +45,10 @@ export const useAuth = () => {
         } )
     }
 
+    const logoutUser = () => {
+        dispatch( startLoggingOut() )
+    }
+
     return {
         // Attributes
         displayName,
@@ -58,7 +62,8 @@ export const useAuth = () => {
         registerUser,
         loginUser,
         loginWithGoogle,
-        checkAuth
+        checkAuth,
+        logoutUser
     }
 
 }

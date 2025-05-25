@@ -1,7 +1,8 @@
 import type { Dispatch } from "@reduxjs/toolkit"
-import { login, setIsLoading } from "./auth.slice"
-import { loginWithEmailAndPassword, registerUserWithEmail, singInWithGoogle, type LoginWithEmailAndPassword, type RegisterUserWithEmail } from "../../firebase/provider"
-import { showAlert, AlertType } from "../ui/ui.slice"
+import { login, logout, setIsLoading } from "./auth.slice"
+import { loginWithEmailAndPassword, logoutFirebase, registerUserWithEmail, singInWithGoogle, type LoginWithEmailAndPassword, type RegisterUserWithEmail } from "../../firebase/provider"
+import { showAlert, AlertType, resetUi } from "../ui/ui.slice"
+import { resetNotes } from "../notes/notes.slice"
 
 export const startCreatingUserWithEmail = (data: RegisterUserWithEmail) => {
 
@@ -112,5 +113,17 @@ export const startLoggingWithGoogle = () => {
 
 
         dispatch( setIsLoading( false ) )
+    }
+}
+
+export const startLoggingOut = () => {
+    return async ( dispatch: Dispatch ) => {
+
+        dispatch( logout() )
+        dispatch( resetNotes() )
+        dispatch( resetUi() )
+
+        await logoutFirebase()
+
     }
 }

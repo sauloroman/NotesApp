@@ -1,30 +1,59 @@
-import React from 'react'
-import { MdOutlineWbSunny } from "react-icons/md";
-import { FaAngleRight } from "react-icons/fa";
-import { MdOutlineTextFields } from "react-icons/md";
+import React from 'react';
+import { MdOutlineWbSunny } from 'react-icons/md';
+import { FaAngleRight } from 'react-icons/fa';
+import { MdOutlineTextFields } from 'react-icons/md';
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { useAuth } from '../../hooks';
 
 interface SettingsMenuProps {
-    viewName: string,
-    setViewName: ( name: string ) => void
+  viewName: string;
+  setViewName: (name: string) => void;
 }
 
-export const SettingsMenu: React.FC<SettingsMenuProps> = ({ viewName, setViewName }) => {
+export const SettingsMenu: React.FC<SettingsMenuProps> = ({
+  viewName,
+  setViewName,
+}) => {
+
+  const { logoutUser } = useAuth()
+
   return (
-    <ul className='flex flex-col gap-4'>
-        <li onClick={() => setViewName('theme')} className={`text-sm flex items-center dark:hover:bg-gray-700 justify-between cursor-pointer transition-colors duration-200 p-2 rounded-md hover:bg-violet-100 ${ viewName === 'theme' && 'bg-violet-100 dark:bg-gray-700' }`}>
-            <div className='flex gap-2'>
-                <MdOutlineWbSunny className='text-lg' />
-                <p>Tema de color</p>
-            </div>
-            <FaAngleRight className='text-md' />
+    <ul>
+      <div className="border-b border-gray-300 pb-4 mb-4 flex flex-col gap-4">
+        <li
+          onClick={() => setViewName('theme')}
+          className={`text-sm flex items-center dark:hover:bg-gray-700 justify-between cursor-pointer transition-colors duration-200 p-2 rounded-md hover:bg-violet-100 ${
+            viewName === 'theme' && 'bg-violet-100 dark:bg-gray-700'
+          }`}
+        >
+          <div className="flex gap-2">
+            <MdOutlineWbSunny className="text-lg" />
+            <p>Tema de color</p>
+          </div>
+          <FaAngleRight className="text-md" />
         </li>
-        <li onClick={() => setViewName('font')}  className={`text-sm flex items-center dark:hover:bg-gray-700 justify-between cursor-pointer transition-colors duration-200 p-2 rounded-md hover:bg-violet-100 ${ viewName === 'font' && 'bg-violet-100 dark:bg-gray-700' }`}>
-            <div className='flex gap-2'>
-                <MdOutlineTextFields className='text-lg' />
-                <p>Tema de fuente</p>
-            </div>
-            <FaAngleRight className='text-md' />
+        <li
+          onClick={() => setViewName('font')}
+          className={`text-sm flex items-center dark:hover:bg-gray-700 justify-between cursor-pointer transition-colors duration-200 p-2 rounded-md hover:bg-violet-100 ${
+            viewName === 'font' && 'bg-violet-100 dark:bg-gray-700'
+          }`}
+        >
+          <div className="flex gap-2">
+            <MdOutlineTextFields className="text-lg" />
+            <p>Tema de fuente</p>
+          </div>
+          <FaAngleRight className="text-md" />
         </li>
+      </div>
+      <li
+        onClick={() => logoutUser()}
+        className='text-sm flex items-center dark:hover:bg-gray-700 justify-between cursor-pointer transition-colors duration-200 p-2 rounded-md hover:bg-violet-100'
+      >
+        <div className="flex gap-2">
+          <RiLogoutBoxLine className="text-lg" />
+          <p>Cerrar sesión</p>
+        </div>
+      </li>
     </ul>
-  )
-}
+  );
+};
