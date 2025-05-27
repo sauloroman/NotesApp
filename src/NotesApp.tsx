@@ -8,8 +8,8 @@ export const NotesApp: React.FC = () => {
   const { font, onSetFont, onSetTheme } = useUi()
 
   useEffect(() => {
-    const font = JSON.parse(localStorage.getItem('notes-font') || 'poppins' )
-    const theme = JSON.parse(localStorage.getItem('notes-theme') || 'light' )
+    const font = JSON.parse(localStorage.getItem('notes-font')!) || 'poppins'
+    const theme = JSON.parse(localStorage.getItem('notes-theme')!) || 'light'
     onSetFont( font )
     onSetTheme( theme )
   }, [])

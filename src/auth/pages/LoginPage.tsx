@@ -43,7 +43,7 @@ export const LoginPage: React.FC = () => {
       linkText="¿No tienes una cuenta?"
       linkText2="Regístrate"
     >
-      <button onClick={ () => loginWithGoogle() } className='mt-6 p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer hover:bg-gray-50'>
+      <button onClick={ () => loginWithGoogle() } className='mt-6 p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700'>
         <FaGoogle className='inline-block mr-2' />
         Continuar con Google
       </button>
@@ -51,7 +51,7 @@ export const LoginPage: React.FC = () => {
       <form onSubmit={ handleSubmit(onLoginUser) }  className='mt-6' action="">
 
         <div className="mb-6">
-          <label className='mb-2 text-gray-500 block text-left' htmlFor="email">Correo Electrónico</label>
+          <label className='mb-2 dark:text-white text-gray-500 block text-left' htmlFor="email">Correo Electrónico</label>
           <input
             {
               ...register('email', {
@@ -64,13 +64,13 @@ export const LoginPage: React.FC = () => {
             }
             type="email"
             placeholder="Correo electrónico"
-            className="border-1 border-gray-300 rounded-lg p-2 w-full"
+            className="border-1 border-gray-300 rounded-lg p-2 w-full dark:border-gray-700"
           />
           { errors.email && (<span className='text-red-500 text-right block pt-1 text-xs'>{ errors.email.message }</span>) }
         </div>
 
         <div className="mb-6">
-          <label className='mb-2 text-gray-500 block text-left' htmlFor="password">Contraseña</label>
+          <label className='mb-2 dark:text-white text-gray-500 block text-left' htmlFor="password">Contraseña</label>
           <input
             {
               ...register('password', {
@@ -79,14 +79,14 @@ export const LoginPage: React.FC = () => {
             }
             type="password"
             placeholder="Contraseña"
-            className="border-1 border-gray-300 rounded-lg p-2 w-full"
+            className="border-1 border-gray-300 rounded-lg p-2 w-full dark:border-gray-700"
           />
           { errors.password && (<span className='text-red-500 text-right block pt-1 text-xs'>{ errors.password.message }</span>) }  
         </div>
 
         <button
           type="submit"
-          className="p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer bg-violet-500 text-white hover:bg-violet-600"
+          className="p-2 w-full border-1 dark:border-violet-500 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer bg-violet-500 text-white hover:bg-violet-600"
         >
           Iniciar sesión
         </button>

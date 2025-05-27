@@ -85,7 +85,7 @@ export const FormCreateNote: React.FC = () => {
                     })
                 }
                 placeholder='Escribe tu nota aquí...'
-                className='w-full h-96 p-2 border-none text-sm'
+                className='w-full h-96 p-2 border-none text-sm dark:placeholder:text-white'
             />
              { errors.content && <span className='text-red-500 text-right block pt-1 text-xs dark:text-red-400'>{errors.content.message}</span>}
         </div>

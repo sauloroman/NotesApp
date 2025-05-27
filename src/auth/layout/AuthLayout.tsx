@@ -26,12 +26,12 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
   const { isLoading } = useAuth()
 
   return (
-    <div className='text-sm bg-violet-100 h-screen flex items-center justify-center'>
-      <div className="w-lg text-center rounded-xl p-10 bg-white shadow-md">
+    <div className='text-sm bg-violet-100 h-screen flex items-center justify-center dark:bg-gray-900'>
+      <div className="w-lg text-center rounded-xl p-10 bg-white shadow-md dark:bg-gray-800 dark:text-white">
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='text-3xl font-semibold text-gray-800 pb-2 mb-2 '>{title}</h1>
-          <p className='text-gray-500'>{description}</p>
-          <p className='text-gray-500'>{message}</p>
+          <h1 className='text-3xl font-semibold text-gray-800 pb-2 mb-2 dark:text-white'>{title}</h1>
+          <p className='text-gray-500 dark:text-gray-200'>{description}</p>
+          <p className='text-gray-500 dark:text-gray-200'>{message}</p>
         </div>
 
         {

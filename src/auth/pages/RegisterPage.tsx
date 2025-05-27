@@ -52,7 +52,7 @@ export const RegisterPage: React.FC = () => {
         className='mt-6' action="">
 
         <div className="mb-6">
-          <label className='mb-2 text-gray-500 block text-left' htmlFor="name">Nombre</label>
+          <label className='mb-2 dark:text-white text-gray-500 block text-left' htmlFor="name">Nombre</label>
           <input
             {
               ...register('name', {
@@ -65,7 +65,7 @@ export const RegisterPage: React.FC = () => {
             }
             type="text"
             placeholder="Registra tu nombre"
-            className="border-1 border-gray-300 rounded-lg p-2 w-full"
+            className="border-1 border-gray-300 rounded-lg p-2 w-full dark:border-gray-700"
           />
           {
             errors.name && (<span className='text-red-500 text-right block pt-1 text-xs'>{errors.name.message}</span>)
@@ -73,7 +73,7 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label className='mb-2 text-gray-500 block text-left' htmlFor="email">Correo Electrónico</label>
+          <label className='mb-2 text-gray-500 dark:text-white block text-left' htmlFor="email">Correo Electrónico</label>
           <input
             {
               ...register('email', {
@@ -86,7 +86,7 @@ export const RegisterPage: React.FC = () => {
             }
             type="email"
             placeholder="Registra tu correo electrónico"
-            className="border-1 border-gray-300 rounded-lg p-2 w-full"
+            className="border-1 border-gray-300 rounded-lg p-2 w-full dark:border-gray-700"
           />
           { 
             errors.email && (<span className='text-red-500 text-right block pt-1 text-xs'>{errors.email.message}</span>)  
@@ -94,9 +94,9 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label className='mb-2 text-gray-500 block text-left' htmlFor="password">Contraseña</label>
+          <label className='mb-2 text-gray-500 block dark:text-white text-left' htmlFor="password">Contraseña</label>
 
-          <div className="border-1 border-gray-300 rounded-lg p-2 w- flex items-center justify-between">
+          <div className="border-1 border-gray-300 dark:border-gray-700 rounded-lg p-2 w- flex items-center justify-between">
             <input
               {
                 ...register('password', {
@@ -111,7 +111,7 @@ export const RegisterPage: React.FC = () => {
                   }
                 })
               }
-              className='w-full outline-none' 
+              className='w-full outline-none dark:border-gray-700' 
               type={`${showPassword ? 'text' : 'password'}`}
               placeholder="Crea una contraseña"
             />
@@ -123,7 +123,7 @@ export const RegisterPage: React.FC = () => {
 
         <button
           type="submit"
-          className="p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer bg-violet-500 text-white hover:bg-violet-600"
+          className="dark:border-violet-500 p-2 w-full border-1 border-gray-300 rounded-lg transition duration-200 ease-in-out cursor-pointer bg-violet-500 text-white hover:bg-violet-600"
         >
           Registrarse
         </button>

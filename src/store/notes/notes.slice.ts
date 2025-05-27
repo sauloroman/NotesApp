@@ -94,7 +94,22 @@
                     state.notesInView = state.notes.filter( note => !note.archived )
                 }
             },
-            
+
+            setNotesInViewSearch: ( state, { payload }: PayloadAction<string> ) => {
+
+                const searchTerm = payload.toLowerCase()
+
+                state.notesInView = state.notes.filter( note => {
+                    if (
+                        note.title.toLowerCase().includes( searchTerm ) || 
+                        note.content.toLowerCase().includes( searchTerm ) || 
+                        note.tags.some( tag => tag.toLowerCase().includes( searchTerm ))
+                    ) {
+                        return note
+                    }
+                })
+            },
+
             setArchivedNotesInView: ( state ) => {
                 state.notesInView = state.notes.filter( note => note.archived )
             },
@@ -125,4 +140,5 @@
         deleteNote,
         deleteTags,
         resetNotes,
+        setNotesInViewSearch,
     } = notesSlice.actions
