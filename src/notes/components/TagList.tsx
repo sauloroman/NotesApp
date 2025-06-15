@@ -1,17 +1,23 @@
 import React from 'react'
 import { IoPricetagOutline } from 'react-icons/io5'
-import { useNotes } from '../../hooks'
+import { useNotes, useUi } from '../../hooks'
 
 export const TagList: React.FC = () => {
 
+    const { hideAsideMenu } = useUi()
     const { tags, setFilter, filterTag } = useNotes()
+
+    const onSelectTag = ( value: string ) => {
+        setFilter( value )
+        hideAsideMenu()
+    }
 
     return (
         <div className='text-sm h-[30rem] overflow-y-auto  [&::-webkit-scrollbar]:hidden scrollbar-hide'>
             <h2 className='font-semibold text-gray-500 mb-4 dark:text-white'>Tags</h2>
             <ul className='flex flex-col gap-2'>
                 <li
-                    onClick={() => setFilter("")}
+                    onClick={() => onSelectTag("")}
                     key={'no-filter'}
                     className={`
                             cursor-pointer 
@@ -30,7 +36,7 @@ export const TagList: React.FC = () => {
                 {
                     tags.map(tag => (
                         <li
-                            onClick={() => setFilter(tag)}
+                            onClick={() => onSelectTag(tag)}
                             key={tag}
                             className={`
                             cursor-pointer 

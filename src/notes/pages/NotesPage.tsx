@@ -32,7 +32,7 @@ export const NotesPage: React.FC = () => {
           </button>
           <NotesList /> 
         </div>
-        <div className="col-span-3">
+        <div className="col-span-3 min-h-screen dark:bg-gray-900">
 
           { skeletonActive 
             ? <SkeletonFormCreateNote /> 

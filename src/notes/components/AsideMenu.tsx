@@ -1,23 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TagList, MenuPages } from './'
 import { useUi } from '../../hooks'
 import { TitlePage } from '../../store/ui/ui.slice'
 import logoDark from '../../assets/img/logo-notes-dark.png'
 import logo from '../../assets/img/logo-notes.png'
+import { MdClose } from "react-icons/md";
 
 export const AsideMenu: React.FC = () => {
 
-  const { titlePage, theme } = useUi()
+  const { titlePage, theme, hideAsideMenu, asideMenu: { isOpen } } = useUi()
+
+  useEffect(() => {
+    hideAsideMenu()
+  }, [titlePage])
 
   return (
-    <aside className='fixed top-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700 left-[-16rem] lg:left-0 transition-all duration-300 ease-in-out z-10'>
-        <div className="flex h-16">
-          {
-            theme === 'dark'
-            ? <img src={logoDark} alt="Logo App" className='h-20 mt-[-20px]'  />
-            : <img src={logo} alt="Logo App" className='h-20 mt-[-20px]'  />
-          } 
-        </div>     
+    <aside className={`fixed top-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700  ${!isOpen ? 'left-[-16rem]' : 'left-0 shadow-lg shadow-amber-50'} z-10 lg:z-0 lg:left-0 transition-all duration-300 ease-in-out z-10`}>
+        <div className='flex justify-between'>
+          <div className="flex h-16">
+            {
+              theme === 'dark'
+              ? <img src={logoDark} alt="Logo App" className='h-20 mt-[-20px]'  />
+              : <img src={logo} alt="Logo App" className='h-20 mt-[-20px]'  />
+            } 
+          </div> 
+          <MdClose onClick={ hideAsideMenu } className='dark:text-white text-3xl lg:hidden' />    
+        </div>
         <div className='pb-4 border-b border-gray-300'>
             <MenuPages />
         </div>

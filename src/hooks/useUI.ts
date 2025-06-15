@@ -13,7 +13,11 @@ import {
     closeModal,
     setRestoreNoteUid,
     setTheme,
-    setFont
+    setFont,
+    openAsideMenu,
+    closeAsideMenu,
+    openSearch,
+    closeSearch
 } from "../store/ui/ui.slice"
 import type { Note } from "../store/notes/notes.slice"
 
@@ -21,7 +25,7 @@ export const useUi = () => {
 
     const dispatch = useDispatch<any>()
 
-    const { alert, createNote, viewNote, titlePage, modal, restoreNoteUid, theme, font } = useSelector( (state: RootState) => state.ui )
+    const { alert, createNote, viewNote, titlePage, modal, restoreNoteUid, theme, font, asideMenu, search } = useSelector( (state: RootState) => state.ui )
 
     const openCreateNote = () => {
         dispatch( deactivateNote() )
@@ -50,6 +54,23 @@ export const useUi = () => {
         dispatch( closeModal() )
     }
 
+    const showAsideMenu = () => {
+        dispatch( openAsideMenu() )
+    }
+
+    const hideAsideMenu = () => {
+        dispatch( closeAsideMenu() )
+    }
+
+    const showSearch = () => {
+        dispatch( openSearch() )
+    }
+
+    const hideSearch = () => {
+        dispatch( closeSearch() )
+    }
+
+
     const onSetRestoreNoteUid = ( noteId: string ) => {
         dispatch(setRestoreNoteUid( noteId ))
     }
@@ -71,23 +92,29 @@ export const useUi = () => {
     }
 
     return {
-        modal,
         alert,
+        asideMenu,
         createNote,
-        titlePage,
-        viewNote,
+        font,
+        modal,
         restoreNoteUid,
         theme,
-        font,
+        titlePage,
+        search,
+        viewNote,
         
+        hideAsideMenu,
+        hideModal,
+        hideSearch,
+        onSetFont,
         onSetRestoreNoteUid,
+        onSetTheme,
+        onSetTitlePage,
         openCreateNote,
         selectNote,
-        onSetTitlePage,
+        showAsideMenu,
         showModal,
-        hideModal,
-        onSetFont,
-        onSetTheme,
+        showSearch,
     }
 
 }

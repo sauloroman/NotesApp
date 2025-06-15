@@ -9,22 +9,28 @@ import { FaSearch } from "react-icons/fa";
 export const Header: React.FC = () => {
 
   const { goSettings } = useNavigatePage()
-  const { titlePage } = useUi()
+  const { titlePage, showAsideMenu, hideSearch, showSearch, search } = useUi()
+
+  const onToggleSearch = () => {
+    if ( search.isOpen ) {  
+      hideSearch()
+    } else {
+      showSearch()
+    }
+  }
 
   return (
-    <header className='border-b border-gray-200 lg:p-4 p-2 h-10 lg:h-16 fixed top-0 bg-white lg:w-[calc(100%-16rem)] shadow w-full dark:bg-gray-900 dark:text-white dark:border-gray-700'>
-        
-        <div className="flex lg:flex-col lg:flew-row lg:items-center justify-between w-full">
-            <h1 className='font-bold lg:text-2xl text-sm'>{titlePage}</h1>
-            
-            <div className="flex items-center gap-4">
-                { titlePage === TitlePage.allNotes &&  <InputSearchNote />}
-                <GoGear className='text-xl cursor-pointer' onClick={goSettings} />
-                <FaSearch className='text-xl cursor-pointer lg:hidden' />
-                <MdOutlineMenu className='text-xl cursor-pointer' />
-            </div>
-        </div>
-
+    <header className='border-b border-gray-200 lg:p-4 p-2 h-16 fixed top-0 bg-white lg:w-[calc(100%-16rem)] shadow w-full dark:bg-gray-900 dark:text-white dark:border-gray-700'>  
+      <div className="flex flew-row items-center justify-between w-full h-12">
+          <h1 className={`font-bold lg:text-2xl text-sm ${ search.isOpen && 'hidden'}`}>{titlePage}</h1>
+          
+          <div className={`${search.isOpen && 'justify-between w-full'} flex items-center gap-4`}>
+              { titlePage === TitlePage.allNotes &&  <InputSearchNote />}
+              <GoGear className={`text-xl cursor-pointer ${titlePage === TitlePage.settings && 'hidden'}`} onClick={goSettings} />
+              <FaSearch onClick={ onToggleSearch } className={`text-xl cursor-pointer lg:hidden ${ (titlePage === TitlePage.settings || titlePage === TitlePage.archivedNotes) && 'hidden'}`} />
+              <MdOutlineMenu onClick={ showAsideMenu } className='text-xl cursor-pointer lg:hidden' />
+          </div>
+      </div>
     </header>
   )
 }

@@ -70,6 +70,7 @@ export const startGettingNotes = () => {
             })
 
             dispatch( setNotes( notes ) )
+            dispatch( activateNote( notes[0] ) )
             dispatch( setNotesInView() )
 
         } catch (error) {

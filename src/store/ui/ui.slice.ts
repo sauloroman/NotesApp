@@ -36,6 +36,12 @@ interface InitialStateUI {
         type: AlertType,
         isAlertOpen: boolean,
     },
+    asideMenu: {
+        isOpen: boolean
+    },  
+    search: {
+        isOpen: boolean
+    },
     modal: {
         isOpen: boolean,
         modalName: ModalName
@@ -59,6 +65,12 @@ export const initialState: InitialStateUI = {
         message: null,
         type: AlertType.info,
         isAlertOpen: false,
+    },
+    asideMenu: {
+        isOpen: false,
+    },
+    search: {
+        isOpen: false
     },
     modal: {
         isOpen: false,
@@ -85,6 +97,9 @@ export const uiSlice = createSlice({
             state.restoreNoteUid = ""
             state.theme = 'light'
             state.font = 'poppins'
+            state.asideMenu = {
+                isOpen: false,
+            },
             state.alert = {
                 message: null,
                 type: AlertType.info,
@@ -166,6 +181,25 @@ export const uiSlice = createSlice({
             }
         },
 
+        openAsideMenu: (state) => {
+            state.asideMenu.isOpen = true
+        },
+
+        
+        closeAsideMenu: (state) => {
+            state.asideMenu.isOpen = false
+        },
+
+        openSearch: (state) => {
+            state.search.isOpen = true
+        },
+
+        
+        closeSearch: (state) => {
+            state.search.isOpen = false
+        },
+
+
         setRestoreNoteUid: ( state, {payload}: PayloadAction<string>) => {
             state.restoreNoteUid = payload
         },
@@ -182,19 +216,23 @@ export const uiSlice = createSlice({
 })  
 
 export const {
-    showAlert,
-    closeAlert,
-    activeSkeletonCreateNote,
-    activeCreateNote,
     activateNote,
+    activeCreateNote,
+    activeSkeletonCreateNote,
+    closeAlert,
+    closeAsideMenu,
+    closeModal,
+    closeSearch,
+    deactivateNote,
     deactiveCreateNote,
     deactiveSkeletonCreateNote,
-    deactivateNote,
-    setTitlePage,
+    openAsideMenu,
     openModal,
-    closeModal,
+    openSearch,
+    resetUi,
+    setFont,
     setRestoreNoteUid,
     setTheme,
-    setFont,
-    resetUi,
+    setTitlePage,
+    showAlert,
 } = uiSlice.actions
