@@ -83,7 +83,7 @@ export const FormUpdateNote: React.FC = () => {
                     </div>
                     { errors.tags && <span className='text-red-500 text-right block pt-1 text-sm dark:text-red-400'>{errors.tags.message}</span>}
                 </div>
-                <div className='flex gap-4 items-center'>
+                <div className='flex gap-4 lg:items-center flex-col lg:flex-row'>
                   <div className="flex gap-4 text-sm">
                       <div className='flex gap-1 items-center dark:font-bold'>
                           <GoClock className='dark:text-white text-gray-500 text-lg' />   
@@ -108,7 +108,7 @@ export const FormUpdateNote: React.FC = () => {
                         })
                     }
                     placeholder='Escribe tu nota aquí...'
-                    className='w-full h-96 p-2 border-none text-sm dark:placeholder:text-white dark:text-white'
+                    className='w-full lg:h-96 h-80 p-2 border-none text-sm dark:placeholder:text-white dark:text-white'
                 />
                 { errors.content && <span className='text-red-500 text-right block pt-1 text-sm dark:text-red-400'>{errors.content.message}</span>}
             </div>

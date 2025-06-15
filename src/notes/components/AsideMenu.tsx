@@ -10,7 +10,7 @@ export const AsideMenu: React.FC = () => {
   const { titlePage, theme } = useUi()
 
   return (
-    <aside className='fixed top-0 left-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700'>
+    <aside className='fixed top-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700 left-[-16rem] lg:left-0 transition-all duration-300 ease-in-out z-10'>
         <div className="flex h-16">
           {
             theme === 'dark'

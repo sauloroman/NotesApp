@@ -13,7 +13,7 @@ export const InputSearchNote: React.FC = () => {
   }
 
   return (
-    <form onSubmit={ onSearchNote }>
+    <form onSubmit={ onSearchNote } className='hidden'>
         <div className="w-100 flex items-center rounded-sm border border-gray-300 p-2 gap-2 text-sm dark:border-gray-500 dark:bg-gray-900 dark:text-white">
             <CiSearch className='dark:text-white' />
             <input

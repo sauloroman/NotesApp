@@ -69,7 +69,7 @@ export const LoginPage: React.FC = () => {
           { errors.email && (<span className='text-red-500 text-right block pt-1 text-xs'>{ errors.email.message }</span>) }
         </div>
 
-        <div className="mb-6">
+        <div className="mb-10">
           <label className='mb-2 dark:text-white text-gray-500 block text-left' htmlFor="password">Contraseña</label>
           <input
             {
