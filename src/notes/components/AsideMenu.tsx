@@ -15,7 +15,7 @@ export const AsideMenu: React.FC = () => {
   }, [titlePage])
 
   return (
-    <aside className={`fixed top-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700  ${!isOpen ? 'left-[-16rem]' : 'left-0 shadow-lg shadow-amber-50'} z-10 lg:z-0 lg:left-0 transition-all duration-300 ease-in-out z-10`}>
+    <aside className={`fixed top-0 h-screen bg-white w-64 border-r border-gray-300 p-4 dark:bg-gray-900 dark:border-gray-700  ${!isOpen ? 'left-[-16rem]' : 'left-0 shadow-lg shadow-amber-50'} z-10 lg:z-0 lg:left-0 transition-all duration-300 ease-in-out`}>
         <div className='flex justify-between'>
           <div className="flex h-16">
             {
