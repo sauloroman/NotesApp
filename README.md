@@ -56,7 +56,7 @@ This project can be easily deployed to Netlify, Vercel, or any static hosting pr
 
 ## 📸 Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
   <img src="./src/assets/design/1.png" width="100%" alt="Screenshot 1"/>
   <img src="./src/assets/design/2.png" width="100%" alt="Screenshot 1"/>
   <img src="./src/assets/design/3.png" width="100%" alt="Screenshot 1"/>
