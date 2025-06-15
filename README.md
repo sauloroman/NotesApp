@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# 📝 Notes App – A Modern Note-Taking Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, organized, and responsive note-taking app built with modern web technologies like **React**, **TypeScript**, **TailwindCSS**, **Redux**, and **Firebase**.
 
-Currently, two official plugins are available:
+<img src="./src/assets/design/cover.png" width="100%" alt="Screenshot 1"/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✍️ Create, edit, and delete notes
+- 🗂️ Organize notes using folders and tags
+- 🌗 Light and dark theme support
+- 🔐 Secure authentication with Firebase
+- 💾 Persistent note storage using Firestore (non real-time)
+- 🔎 Search and filter notes by tags
+- 📱 Fully responsive and user-friendly design
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **React** – UI library for building components
+- **TypeScript** – Strongly typed JavaScript
+- **TailwindCSS** – Utility-first CSS framework
+- **Redux Toolkit** – Global state management
+- **Firebase** – Authentication and Firestore database
+- **HTML5** – Structural foundation
+
+## 📦 Getting Started
+
+1. Clone the repo:
+```
+  git clone https://github.com/your-username/notes-app.git
+  cd notes-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install Dependencies
 ```
+  npm install
+```
+
+3. Create a .env file in the root directory and add your Firebase credentials:
+```
+  VITE_API_KEY=your_api_key
+  VITE_AUTH_DOMAIN=your_auth_domain
+  VITE_PROJECT_ID=your_project_id
+  VITE_STORAGE_BUCKET=your_storage_bucket
+  VITE_MESSAGING_SENDER_ID=your_messaging_sender_id
+  VITE_APP_ID=your_app_id
+```
+
+4. Start the development server:
+```
+  npm run dev
+```
+
+## 📤 Deployment
+This project can be easily deployed to Netlify, Vercel, or any static hosting provider. Make sure to add all required environment variables in your hosting dashboard.
+
+## 📸 Screenshots
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="./src/assets/design/1.png" width="100%" alt="Screenshot 1"/>
+  <img src="./src/assets/design/2.png" width="100%" alt="Screenshot 1"/>
+  <img src="./src/assets/design/3.png" width="100%" alt="Screenshot 1"/>
+  <img src="./src/assets/design/4.png" width="100%" alt="Screenshot 1"/>
+  <img src="./src/assets/design/5.png" width="100%" alt="Screenshot 1"/>
+</div>
