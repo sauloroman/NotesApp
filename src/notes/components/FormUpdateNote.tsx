@@ -15,6 +15,9 @@ export const FormUpdateNote: React.FC = () => {
 
   const { viewNote: { selected } } = useUi()
   const { updateNote, isLoading } = useNotes()
+
+  if ( !selected ) return
+
   const { updatedAt, createdAt } = selected!
 
   const {
